@@ -21,9 +21,9 @@
 				<a href="#" class="social"><img src="icons/icons8-linkedin.svg" class ="icon" ></img></a>
 			</div>
 			<span>or use your email for registration</span>
-			<input type="text" placeholder="Email Address" />
-			<input type="email" placeholder="Password" />
-			<input type="password" placeholder="Re-type Password" />
+			<input type="email" placeholder="Email Address" id="submit_email_create"/>
+			<input type="password" placeholder="Password" id="submit_pass_create"/>
+			<input type="password" placeholder="Re-type Password" id="submit_pass_re" />
 			<button type="submit">Sign Up</button>
 		</form>
 	</div>
@@ -36,8 +36,8 @@
 				<a href="#" class="social"><img src="icons/icons8-linkedin.svg" class ="icon" ></img></a>
 			</div>
 			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
+			<input type="email" placeholder="Email" id="submit_email_signin"/>
+			<input type="password" placeholder="Password" id="submit_pass_signin"/>
 			<a href="#">Forgot your password?</a>
 			<button type="submit">Sign In</button>
 		</form>
@@ -66,6 +66,34 @@
 		<a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
 	</p>
 </footer>
-<script src="login.js"></script>
+
+<!--Firebase here-->
+<script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+	// import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js'
+    // import { getFirestore  } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js'
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+  
+	// Your web app's Firebase configuration
+	const firebaseConfig = {
+	  apiKey: "AIzaSyDy0vFrfvuXoi4xEa9zi7qlkNFy3haRtOI",
+	  authDomain: "dadn-6c126.firebaseapp.com",
+	  projectId: "dadn-6c126",
+	  storageBucket: "dadn-6c126.appspot.com",
+	  messagingSenderId: "768299472042",
+	  appId: "1:768299472042:web:2bbf97516e7c06e092ecd3"
+	};
+  
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+
+	// Make auth, firestore
+	// const auth = getAuth();
+	// const db = getFirestore();
+  </script>
+
+<script type="module" src="login.js"></script>
 </body>
 </html>
