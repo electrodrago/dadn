@@ -52,6 +52,7 @@ text-decoration: none;
     transition: background-color 300ms;
     padding: 14px 20px;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .index_nav_login:hover{
@@ -93,7 +94,7 @@ body{
 }
 .Intro_details{
     font-weight: lighter;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.795);
     font-size: 1.1rem;
 
 }
@@ -165,5 +166,15 @@ body{
 
 .index_nav_logo{
     color: whitesmoke;
+}
+.Logo_image{
+    width: 200px;
+    height: 65px;   
+    position: relative;
+    background-image: url(Images/hcmut\ \(2\).png);
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
   
