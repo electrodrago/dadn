@@ -22,6 +22,24 @@
     height: 35px;
     width: 35px;
 }
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+.index_nav_options{
+  display: flex;
+  column-gap: 20px;
+  margin-right: 100px;
+}
+.index_nav_options_home, .index_nav_options_course, .index_nav_options_about{
+  color: #7971ea ;
+  font-size: 22px;
+
+  padding: 11px 15px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 300ms;
+  font-weight: 500;
+}
 nav{
     display: flex;
     background-color: #f8f9fa;
@@ -30,6 +48,7 @@ nav{
     font-weight: 500;
     display: block;
     height: 80px;
+    align-items: center;
 }
 .Container{
     display: flex;
@@ -56,10 +75,11 @@ nav{
     
 }
 .logo_image{
-    width: 175px;
-    height: 30px;   
+    top: -20px;
+    width: 80px;
+    height: 60px;   
     position: relative;
-    background-image: url(https://s2.coinmarketcap.com/static/cloud/img/coinmarketcap_1.svg?_=a91e2fa);
+    background-image: url(Images/logo8.png);
     display: inline-block;
     background-position: center center;
     background-repeat: no-repeat;
@@ -73,7 +93,7 @@ nav{
     padding: 5px 15px;
     border-radius: 30px;
     text-decoration: none;
-    height: 50;
+    height: 60;
 }
 .Nav_bar_Logout:hover{
     background-color: #0d0cb5;
