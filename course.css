@@ -34,7 +34,6 @@ a{
 .index_nav_options_home, .index_nav_options_course, .index_nav_options_about{
   color: #7971ea ;
   font-size: 22px;
-
   padding: 11px 15px;
   border-bottom: 1px solid transparent;
   transition: border-color 300ms;
