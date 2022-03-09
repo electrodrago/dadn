@@ -19,8 +19,22 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.min.css" rel="stylesheet">
   <style>
+/* Style buttons */
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 10px;
+}
 
-    .map-container{
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+.map-container{
 overflow:hidden;
 padding-bottom:56.25%;
 position:relative;
@@ -144,9 +158,11 @@ position:absolute;
           <div class="card">
 
             <!--Card content-->
+            
             <div class="card-body">
-
+              
                 <canvas id="myChart"></canvas>
+                <button class="btn" onclick="download_bar()"><i class="fa fa-download"></i> Download</button>
                 <script>
                     function dynamicColors() {
                         var r = Math.floor(Math.random() * 255);
@@ -232,43 +248,51 @@ position:absolute;
               <!--Card content-->
               <div class="card-body">
                 <div id="piechart"></div>
-
+                <a id="download_link" href="" style="display:contents" download="PieChart">Export as Image</a>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
                 <script type="text/javascript">
-                    // Load google charts
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
+                  // Load google charts
+                  google.charts.load('current', {'packages':['corechart']});
+                  google.charts.setOnLoadCallback(drawChart);
+
+                  // Draw the chart and set the chart values
+                  function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                    ['Mark', 'Total of students'],
+                    ['0 point', 8],
+                    ['1 point', 2],
+                    ['2 point', 4],
+                    ['3 point', 2],
+                    ['4 point', 8],
+                    ['5 point', 8],
+                    ['6 point', 2],
+                    ['7 point', 4],
+                    ['8 point', 2],
+                    ['9 point', 8],
+                    ['10 point', 3]
+                  ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = {'title':'Distribution of mark in class', 'width':650, 'height':400};
                     
-                    // Draw the chart and set the chart values
-                    function drawChart() {
-                      var data = google.visualization.arrayToDataTable([
-                      ['Mark', 'Total of students'],
-                      ['0 point', 8],
-                      ['1 point', 2],
-                      ['2 point', 4],
-                      ['3 point', 2],
-                      ['4 point', 8],
-                      ['5 point', 8],
-                      ['6 point', 2],
-                      ['7 point', 4],
-                      ['8 point', 2],
-                      ['9 point', 8],
-                      ['10 point', 3]
-                    ]);
+                    // Display the chart inside the <div> element with id="piechart"
+                    var my_div = document.getElementById('piechart');
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                     
-                      // Optional; add a title and set the width and height of the chart
-                      var options = {'title':'Distribution of mark in class', 'width':600, 'height':400};
-                    
-                      // Display the chart inside the <div> element with id="piechart"
-                      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                      chart.draw(data, options);
-                    }
+                    google.visualization.events.addListener(chart, 'ready', function () {
+                      my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+                      document.getElementById("download_link").setAttribute("href", chart.getImageURI())
+                      document.getElementById("download_link").click();
+              
+                    });
+                    chart.draw(data, options);
+                  }
                 </script>
+  
               </div>
-  
+              <!--/.Card-->
             </div>
-            <!--/.Card-->
-  
   
           </div>
           <!--Grid column-->
@@ -347,7 +371,20 @@ position:absolute;
 
   <!-- Charts -->
   <script>
-
+    function download_bar () {
+      const imageLink = document.createElement('a');
+      const canvas = document.getElementById('myChart');
+      imageLink.download = 'barchart.png';
+      imageLink.href= canvas.toDataURL('image/png', 1);
+      imageLink.click();
+    }
+    function download_pie () {
+      const imageLink = document.createElement('a');
+      const canvas = document.getElementById('piechart');
+      imageLink.download = 'piechart.png';
+      imageLink.href= canvas.toDataURL('image/png', 1);
+      imageLink.click();
+    }
     //pie
     var ctxP = document.getElementById("pieChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
