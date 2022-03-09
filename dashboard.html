@@ -19,6 +19,14 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.min.css" rel="stylesheet">
   <link rel="stylesheet" href="dashboard.css">
+<style>
+  @media (min-height: 300px) {
+  nav ul {
+    position: sticky;
+    top: 0;
+  }
+}
+</style>
 </head>
 
 <body class="grey lighten-3">
@@ -27,8 +35,8 @@
   <header>
 
     <!-- Navbar -->
-    <nav class="Nav">
-      <div class="Container">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar navbar-toggler" style="background-color: #e5ecf1;">
+      <div class="container-fluid">
           <div class="Nav_bar_Logo">
               <a href="" title="Go to HomePage" class="Logo_return">
                   <!-- <img src="/Images/logo7.png" alt="" style="height: 70px; width: 50px;"> -->
@@ -48,19 +56,18 @@
   
           </div>
           <a class="Nav_bar_Logout">
-                  <p>Logout</p>
+            <p>Logout</p>
           </a>
       </div>  
   </nav>
     <!-- Navbar -->
 
     <!-- Sidebar -->
-    <!-- <div class="sidebar-fixed position-fixed">
-
+    <div class="sidebar-fixed position-fixed" style="background-color: #eff1f5; border-color: #cac2c2;">
       <a class="logo-wrapper waves-effect">
-        <img src="Images/logo8.png" class="img-fluid" alt="" style="height: 100px; width: 80px;">
+        <img src="Images/logo8.png" class="img-fluid" alt="" style="height: 60px; width: 60px;">
       </a>
-
+      <br>
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item active waves-effect">
           <i class="fas fa-chart-pie mr-3"></i>Dashboard
@@ -69,8 +76,8 @@
           <i class="fas fa-user mr-3"></i>Profile</a>
       </div>
 
-    </div> -->
-    <!-- Sidebar -->
+    </div>
+    <!-- Sidebar
 
   </header>
   <!--Main Navigation-->
@@ -198,7 +205,7 @@
                 <!--Card content-->
                 <div class="card-body">
                   <div id="piechart"></div>
-                  <a id="download_link" href="" style="display:contents" download="PieChart">Export as Image</a>
+                  <!-- <a id="download_link" href="" style="display:contents" download="PieChart">Export as Image</a> -->
                   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   
                   <script type="text/javascript">
@@ -230,13 +237,20 @@
                       var my_div = document.getElementById('piechart');
                       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                       
-                      google.visualization.events.addListener(chart, 'ready', function () {
+                      /*google.visualization.events.addListener(chart, 'ready', function () {
                         my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
                         document.getElementById("download_link").setAttribute("href", chart.getImageURI())
                         document.getElementById("download_link").click();
                 
+                      });*/
+                      google.visualization.events.addListener(chart, 'ready', function () {
+                        my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+                        //document.getElementById("download_link").setAttribute("href", chart.getImageURI())
+                        //document.getElementById("download_link").click();
+
                       });
                       chart.draw(data, options);
+                      
                     }
                   </script>
     
@@ -255,9 +269,8 @@
   <!--Main layout-->
 
   <!--Footer-->
-  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
-
-    <hr class="my-4">
+  <footer class="page-footer text-center font-small primary-color-dark darken-2 ">
+    <br>
 
     <!-- Social icons -->
     <div class="pb-4">
