@@ -33,8 +33,6 @@ for i in dict_list:
 # Create dictionary of string and id on firebase
 # Demo: {'Tien - Teach1': 'KuUgdSdWGpTrVHloCphbw5YA8A62'}
 select_firestore = dict(zip(concat, id_list))
-print(concat)
-print(select_firestore)
 
 """----------------------------------------------------------------------------------------------------"""
 # Select subject, to retrieve the marking result on database
@@ -42,6 +40,15 @@ print(select_firestore)
 # All the informations are first query from the database and then upload into the client view
 # Use dictionary with: Name of subject - answer
 # TODO: Code with tktiner client
+
+user_to_access_firebase = "KuUgdSdWGpTrVHloCphbw5YA8A62"
+select_course = db.collection('teacher').document(user_to_access_firebase).collection('course')
+courses = select_course.stream()
+course_list = []
+for course in courses:
+    course_list.append(course.id)
+print(course_list)
+
 
 """----------------------------------------------------------------------------------------------------"""
 # Button start marking or cancel, start making will display a client with camera view
