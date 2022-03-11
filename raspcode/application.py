@@ -1,5 +1,7 @@
 import tkinter as tk
 import time
+from cv2 import cv2
+from PIL import Image, ImageTk
 
 # Variable for test application
 concat = ['Tien - Teach1', 'Viet - Teach2']
@@ -25,7 +27,7 @@ class App(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (chooseTeacherPage, chooseCoursePage):
+        for F in (chooseTeacherPage, chooseCoursePage, chooseMarkingPage, chooseCameraPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -75,7 +77,7 @@ class chooseTeacherPage(tk.Frame):
             borderwidth = 1,
             width=20,
             height=1,
-            font=('orbitron',10, 'bold'),
+            font=('orbitron',15, 'bold'),
             fg="#6666CC"
         )
         teacher1_button.pack(pady=10)
@@ -87,7 +89,7 @@ class chooseTeacherPage(tk.Frame):
             borderwidth = 1,
             width=20,
             height=1,
-            font=('orbitron',10, 'bold'),
+            font=('orbitron',15, 'bold'),
             fg="#6666CC"
             
         )
@@ -136,7 +138,7 @@ class chooseCoursePage(tk.Frame):
         def assign_and_next_frame(course_id):
             course_to_access_firebase = course_id
             print(course_to_access_firebase)
-            controller.show_frame('chooseTeacherPage')
+            controller.show_frame('chooseMarkingPage')
                 
         course1_button = tk.Button(self,
             text="Course name: " + course_lst[0],
@@ -145,7 +147,7 @@ class chooseCoursePage(tk.Frame):
             borderwidth = 1,
             width=20,
             height=1,
-            font=('orbitron',10, 'bold'),
+            font=('orbitron',15, 'bold'),
             fg="#6666CC"
         )
         course1_button.pack(pady=10)
@@ -157,7 +159,7 @@ class chooseCoursePage(tk.Frame):
             borderwidth = 1,
             width=20,
             height=1,
-            font=('orbitron',10, 'bold'),
+            font=('orbitron',15, 'bold'),
             fg="#6666CC"
             
         )
@@ -182,7 +184,134 @@ class chooseCoursePage(tk.Frame):
 
         tick()
 
+class chooseMarkingPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent,bg='#00CC99')
+        self.controller = controller
+
+        self.controller.title('Option Selection')
+        # self.controller.state('zoomed')
+        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
+
+        heading_label = tk.Label(self,
+            text='Option \n Which one you choose?',
+            font=('orbitron',20,'bold'),
+            foreground='#ffffff',
+            background='#00CC99'
+        )
+        heading_label.pack(pady=10)
+
+        space_label = tk.Label(self,height=1,bg='#00CC99')
+        space_label.pack()
+
+        def assign_and_next_frame():
+            controller.show_frame('chooseCameraPage')
+                
+        marking_button = tk.Button(self,
+            text="Marking",
+            command=lambda:assign_and_next_frame(),
+            relief='raised',
+            borderwidth = 1,
+            width=20,
+            height=1,
+            font=('orbitron',15, 'bold'),
+            fg="#6666CC"
+        )
+        marking_button.pack(pady=10)
+
+        cancel_button = tk.Button(self,
+            text="Cancel",
+            command=self.controller.destroy,
+            relief='raised',
+            borderwidth = 1,
+            width=20,
+            height=1,
+            font=('orbitron',15, 'bold'),
+            fg="#6666CC"
+            
+        )
+        cancel_button.pack(pady=10)
+
+        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
+        bottom_frame.pack(fill='x',side='bottom')
+
+        # # TODO: Add later
+        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
+        # cse_label = tk.Label(bottom_frame,image=cse_photo)
+        # cse_label.pack(side='left')
+        # cse_label.image = cse_photo
+
+        def tick():
+            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
+            time_label.config(text=current_time)
+            time_label.after(200,tick)
+            
+        time_label = tk.Label(bottom_frame,font=('orbitron',12))
+        time_label.pack(side='right')
+
+        tick()
+
+class chooseCameraPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent,bg='#00CC99')
+        self.controller = controller
+
+        self.controller.title('Webcam view')
+        # self.controller.state('zoomed')
+        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
+
+        label = tk.Label(self, width=145, height=200)
+        label.pack(pady=2)
+        cap = cv2.VideoCapture(0)
+
+        def video_stream():
+            _, frame = cap.read()
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            img = Image.fromarray(cv2image)
+            imgtk = ImageTk.PhotoImage(image=img)
+            label.imgtk = imgtk
+            label.configure(image=imgtk)
+            label.after(1, video_stream)
+        
+        video_stream()
+
+        def assign_and_next_frame():
+            controller.show_frame('chooseTeacherPage')
+                
+        marking_button = tk.Button(self,
+            text="Capture",
+            command=lambda:assign_and_next_frame(),
+            relief='raised',
+            borderwidth = 1,
+            width=20,
+            height=1,
+            font=('orbitron',15, 'bold'),
+            fg="#6666CC"
+        )
+        marking_button.pack(pady=1)
+
+        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
+        bottom_frame.pack(fill='x',side='bottom')
+
+        # # TODO: Add later
+        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
+        # cse_label = tk.Label(bottom_frame,image=cse_photo)
+        # cse_label.pack(side='left')
+        # cse_label.image = cse_photo
+
+        def tick():
+            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
+            time_label.config(text=current_time)
+            time_label.after(200,tick)
+            
+        time_label = tk.Label(bottom_frame,font=('orbitron',12))
+        time_label.pack(side='right')
+
+        tick()
+
 if __name__ == "__main__":
     app = App()
-    app.geometry('400x260')
+    app.geometry('480x280')
     app.mainloop()

@@ -41,13 +41,24 @@ select_firestore = dict(zip(concat, id_list))
 # Use dictionary with: Name of subject - answer
 # TODO: Code with tktiner client
 
+# Global variable
 user_to_access_firebase = "KuUgdSdWGpTrVHloCphbw5YA8A62"
+
 select_course = db.collection('teacher').document(user_to_access_firebase).collection('course')
 courses = select_course.stream()
 course_list = []
 for course in courses:
     course_list.append(course.id)
-print(course_list)
+
+# Global variable
+course_to_access_firebase = course_list[0]
+
+answer_ref = db.collection('teacher').document(user_to_access_firebase).collection('course').document(course_to_access_firebase)
+
+# To check with recognized answer
+answer = answer_ref.get().to_dict()['answer']
+
+print(answer)
 
 
 """----------------------------------------------------------------------------------------------------"""
