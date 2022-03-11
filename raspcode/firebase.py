@@ -13,6 +13,29 @@ db = firestore.client()
 # How to select, all teacher ID is store in dictionary: TeacherID - ID on Firestore
 # TODO: Code with tktiner client
 
+select_teacher = db.collection('teacher')
+teachers = select_teacher.stream()
+
+# id_list store id on firebase
+# dict_list store dictionary of field of documents
+id_list = []
+dict_list = []
+
+for teacher in teachers:
+    id_list.append(teacher.id)
+    dict_list.append(teacher.to_dict())
+
+# Flatten dictionary to string
+concat = []
+for i in dict_list:
+    concat.append(i['name'] + ' - ' + i['id'])
+
+# Create dictionary of string and id on firebase
+# Demo: {'Tien - Teach1': 'KuUgdSdWGpTrVHloCphbw5YA8A62'}
+select_firestore = dict(zip(concat, id_list))
+print(concat)
+print(select_firestore)
+
 """----------------------------------------------------------------------------------------------------"""
 # Select subject, to retrieve the marking result on database
 # Display format: Semester - Class - Name of subject
