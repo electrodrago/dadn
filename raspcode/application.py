@@ -264,13 +264,15 @@ class chooseCameraPage(tk.Frame):
         # self.controller.state('zoomed')
         #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
-        label = tk.Label(self, width=145, height=200)
+        label = tk.Label(self)#, width=145, height=200)
         label.pack(pady=2)
         cap = cv2.VideoCapture(0)
 
         def video_stream():
             _, frame = cap.read()
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            # cv2image = cv2.rotate(cv2image, cv2.ROTATE_90_CLOCKWISE)
+            cv2image = cv2.resize(cv2image, (268, 201)) # (200, 150))
             img = Image.fromarray(cv2image)
             imgtk = ImageTk.PhotoImage(image=img)
             label.imgtk = imgtk
@@ -328,48 +330,32 @@ class chooseCapturePage(tk.Frame):
         # self.controller.state('zoomed')
         #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
-        # image = Image.open("capture/capture.png")
-        # test = ImageTk.PhotoImage(image)
-
-        # image_cv2 = cv2.imread("capture/capture.png")
-        # gray = cv2.cvtColor(image_cv2, cv2.COLOR_BGR2GRAY)
-        # blurry = cv2.Laplacian(gray, cv2.CV_64F).var()
-
-        label = tk.Label(self, width=145, height=200)
+        label = tk.Label(self) #, width=145, height=200)
         label.pack(pady=2)
         self.blurry = 100
         self.text = tk.StringVar()
         
         def image_change():
-            # image_cv2 = cv2.imread("capture/capture.png")
             image_cv2 = cv2.imread("capture/capture.png")
             gray = cv2.cvtColor(image_cv2, cv2.COLOR_BGR2GRAY)
             self.blurry = cv2.Laplacian(gray, cv2.CV_64F).var()
-            if self.blurry >= 100:
+            if self.blurry >= 300:
                 text = "{} - Not blur - Continue".format(int(self.blurry))
             else:
                 text = "{} - Blur - Recapture".format(int(self.blurry))
-            print(self.blurry)
+            # print(self.blurry)
             
             self.text.set(text)
             image = Image.open("capture/capture.png")
+            image = image.resize((268, 201))
             test = ImageTk.PhotoImage(image)
             label.image = test
             label.configure(image=test)
             label.after(1000, image_change)
-            
-        
+                    
         image_change()
 
-        
-
-        def get_display_text(blurry, threshold=100):
-            if blurry >= threshold:
-                return "{} - Not blur - Continue".format(int(blurry))
-            else:
-                return "{} - Blur - Recapture".format(int(blurry))
-
-        def assign_and_next_frame(blurry, threshold=100):
+        def assign_and_next_frame(blurry, threshold=300):
             
             if blurry >= threshold:
                 controller.show_frame('chooseTeacherPage') # Next frame
