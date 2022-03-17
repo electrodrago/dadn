@@ -31,6 +31,9 @@ import {
               lst.push(results.data[i].Key);
         }
         console.log(Object.values(lst));
+        setDoc(doc(db,'teacher', teacher_id),{});
+        setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name),{});
+        setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name),{});
         setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name), {
           AnswerFile: lst,
           Class_Semester: semester,
