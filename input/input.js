@@ -37,7 +37,8 @@ import {
         setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name), {
           AnswerFile: lst,
           Class_Semester: semester,
-          lass_access: new Date()
+          create: new Date(),
+          lass_access: new Date(),
           })
         .then(() => {
           document.querySelector('.form-group').reset();
