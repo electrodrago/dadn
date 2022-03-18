@@ -39,23 +39,50 @@ print(concat)
 # Global variable
 user_to_access_firebase = "101"
 
-select_course = db.collection('TEACHER').document(user_to_access_firebase).collection('COURSE')
+select_course = db.collection(
+    'TEACHER').document(
+        user_to_access_firebase).collection(
+            'COURSE')
 courses = select_course.stream()
 course_list = []
 for course in courses:
     course_list.append(course.id)
+print(course_list)
 
 # Global variable
 course_to_access_firebase = course_list[0]
-print(course_to_access_firebase)
-# answer_ref = db.collection('teacher').document(user_to_access_firebase).collection('course').document(course_to_access_firebase)
 
-# # To check with recognized answer
-# answer = answer_ref.get().to_dict()['answer']
+select_class = db.collection(
+    'TEACHER').document(
+        user_to_access_firebase).collection(
+            'COURSE').document(
+                course_to_access_firebase).collection(
+                    'CLASS')
+classes = select_class.stream()
+class_list = []
+for class_ in classes:
+    class_list.append(class_.id)
 
-# print(answer)
+# Global variable    
+class_to_access_firebase = class_list[0]
 
+answer_ref = db.collection(
+    'TEACHER').document(
+        user_to_access_firebase).collection(
+            'COURSE').document(
+                course_to_access_firebase).collection(
+                    'CLASS').document(
+                        class_to_access_firebase)
 
+answer = answer_ref.get().to_dict()['AnswerFile']
+print(answer)
+
+# Upload to server
+# Global variable
+student_id = 'AAA'
+point = 8
+
+answer_ref.collection('STUDENT').document(student_id).set({'S_Point': point})
 """----------------------------------------------------------------------------------------------------"""
 # Button start marking or cancel, start making will display a client with camera view
 # TODO: Check how to apply hardware

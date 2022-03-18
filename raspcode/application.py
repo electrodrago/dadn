@@ -16,11 +16,12 @@ model = Model(char_list_from_file())
 
 # Variable for test application
 concat = ['101 - Nguyen Quoc Viet', '102 - Bang Ngoc Bao Tam', "103 - Trinh Manh Hung"]
-course_lst = ['IELTS', 'cal1']
-
+course_list = ['Calculus 1', 'Calculus 2']
+class_list = ['CC01']
 # Global variable that change when click button of tkinter
 user_to_access_firebase = ""
 course_to_access_firebase = ""
+class_to_access_firebase = ""
 path_to_img = ""
 done = False
 answer = ["word", "Vet", "Check"]
@@ -41,7 +42,7 @@ class App(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (chooseTeacherPage, chooseCoursePage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
+        for F in (chooseTeacherPage, chooseCoursePage, chooseClassPage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
             page_name = F.__name__
             frame = F(parent=self.container, controller=self)
             self.frames[page_name] = frame
@@ -165,11 +166,11 @@ class chooseCoursePage(tk.Frame):
         def assign_and_next_frame(course_id):
             global course_to_access_firebase
             course_to_access_firebase = course_id
-            controller.show_frame('chooseMarkingPage')
+            controller.show_frame('chooseClassPage')
                 
         course1_button = tk.Button(self,
-            text="Course name: " + course_lst[0],
-            command=lambda:assign_and_next_frame(course_lst[0]),
+            text="Course name: " + course_list[0],
+            command=lambda:assign_and_next_frame(course_list[0]),
             relief='raised',
             borderwidth = 1,
             width=20,
@@ -180,8 +181,8 @@ class chooseCoursePage(tk.Frame):
         course1_button.pack(pady=10)
 
         course2_button = tk.Button(self,
-            text="Course name: " + course_lst[1],
-            command=lambda:assign_and_next_frame(course_lst[1]),
+            text="Course name: " + course_list[1],
+            command=lambda:assign_and_next_frame(course_list[1]),
             relief='raised',
             borderwidth = 1,
             width=20,
@@ -191,6 +192,101 @@ class chooseCoursePage(tk.Frame):
             
         )
         course2_button.pack(pady=10)
+
+
+class chooseClassPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent,bg='#00CC99')
+        self.controller = controller
+
+        self.controller.title('Class Selection')
+
+        heading_label = tk.Label(self,
+            text='Which class \n Your marks belong to?',
+            font=('orbitron',20,'bold'),
+            foreground='#ffffff',
+            background='#00CC99'
+        )
+        heading_label.pack(pady=10)
+
+        space_label = tk.Label(self,height=1,bg='#00CC99')
+        space_label.pack()
+
+        def assign_and_next_frame(class_id):
+            global class_to_access_firebase
+            class_to_access_firebase = class_id
+            controller.show_frame('chooseMarkingPage')
+
+        if len(class_list) > 2:
+            canvas = tk.Canvas(self, bg='#00CC99')
+            scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
+            
+            frame = tk.Frame(canvas, bg='#00CC99')
+            # Add buttons
+            lst_btn = []
+            for i in range(len(concat)):
+                text_display = "Class " + class_list[i]
+                teacher_button = tk.Button(frame,
+                    text=text_display,
+                    command=lambda j=class_list[i]: assign_and_next_frame(j),
+                    relief='raised',
+                    borderwidth = 1,
+                    width=25,
+                    height=1,
+                    font=('orbitron',15, 'bold'),
+                    fg="#6666CC"
+                )
+                lst_btn.append(teacher_button)
+            for i in lst_btn:
+                i.pack(pady=20, padx=75)
+            
+            # Create canvas for scrolling
+            canvas.create_window(0, 0, window=frame)
+            canvas.update_idletasks()
+
+            canvas.configure(scrollregion=canvas.bbox('all'), 
+                            yscrollcommand=scroll_y.set)
+                            
+            canvas.pack(fill='both', expand=True, side='left')
+            scroll_y.pack(fill='y', side='right')
+        elif len(class_list) == 2:
+            teacher1_button = tk.Button(self,
+                text="Class " + class_list[0],
+                command=lambda:assign_and_next_frame(class_list[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            teacher1_button.pack(pady=10)
+
+            teacher2_button = tk.Button(self,
+                text="Class " + class_list[1],
+                command=lambda:assign_and_next_frame(class_list[1]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+                
+            )
+            teacher2_button.pack(pady=10)
+        else:
+            teacher1_button = tk.Button(self,
+                text="Class " + class_list[0],
+                command=lambda:assign_and_next_frame(class_list[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            teacher1_button.pack(pady=10)
 
 
 class chooseMarkingPage(tk.Frame):
