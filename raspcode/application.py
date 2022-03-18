@@ -1,23 +1,35 @@
 import tkinter as tk
 import time
+from click import command
 from cv2 import cv2
 from PIL import Image, ImageTk
 from threading import Thread
+from tkinter import LEFT, RIGHT, TOP, ttk
+from need.main import Model, infer
+from typing import List
+
+def char_list_from_file() -> List[str]:
+    with open('model/charList.txt') as f:
+        return list(f.read())
+
+model = Model(char_list_from_file())
 
 # Variable for test application
-concat = ['Tien - Teach1', 'Viet - Teach2']
-select_firestore = {'Tien - Teach1': 'KuUgdSdWGpTrVHloCphbw5YA8A62', 'Viet - Teach2': 'P4NjjiLZo6hT60YkVy55Ti4duVX2'}
+concat = ['101 - Nguyen Quoc Viet', '102 - Bang Ngoc Bao Tam', "103 - Trinh Manh Hung"]
 course_lst = ['IELTS', 'cal1']
 
 # Global variable that change when click button of tkinter
 user_to_access_firebase = ""
 course_to_access_firebase = ""
 path_to_img = ""
+done = False
+answer = ["word", "Vet", "Check"]
+answer_marking = []
 
 # Get id on firestore
-def query_id(name_id ,sf):
-    user_to_access_firebase = sf[name_id]
-    print(user_to_access_firebase + " - " + name_id)
+def query_id(name_id):
+    global user_to_access_firebase
+    user_to_access_firebase = name_id.split(" ")[0]
 
 class App(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -29,7 +41,7 @@ class App(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (chooseTeacherPage, chooseCoursePage, chooseMarkingPage, chooseCameraPage, chooseCapturePage):
+        for F in (chooseTeacherPage, chooseCoursePage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
             page_name = F.__name__
             frame = F(parent=self.container, controller=self)
             self.frames[page_name] = frame
@@ -44,6 +56,8 @@ class App(tk.Tk):
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
+        if page_name == "chooseDisplayPointPage":
+            frame.t1.start()
         frame.tkraise()
 
 
@@ -54,8 +68,6 @@ class chooseTeacherPage(tk.Frame):
         self.controller = controller
 
         self.controller.title('User Selection')
-        # self.controller.state('zoomed')
-        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
         heading_label = tk.Label(self,
             text='Teacher \n Who are you?',
@@ -69,62 +81,74 @@ class chooseTeacherPage(tk.Frame):
         space_label.pack()
 
         def assign_and_next_frame(name_id):
-            query_id(name_id, select_firestore)
+            query_id(name_id)
             controller.show_frame('chooseCoursePage')
+
+        if len(concat) > 2:
+            canvas = tk.Canvas(self, bg='#00CC99')
+            scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
+            
+            frame = tk.Frame(canvas, bg='#00CC99')
+            # Add buttons
+            lst_btn = []
+            for i in range(len(concat)):
+                text_display = concat[i]
+                teacher_button = tk.Button(frame,
+                    text=text_display,
+                    command=lambda j=text_display: assign_and_next_frame(j),
+                    relief='raised',
+                    borderwidth = 1,
+                    width=25,
+                    height=1,
+                    font=('orbitron',15, 'bold'),
+                    fg="#6666CC"
+                )
+                lst_btn.append(teacher_button)
+            for i in lst_btn:
+                i.pack(pady=20, padx=75)
+            
+            # Create canvas for scrolling
+            canvas.create_window(0, 0, window=frame)
+            canvas.update_idletasks()
+
+            canvas.configure(scrollregion=canvas.bbox('all'), 
+                            yscrollcommand=scroll_y.set)
+                            
+            canvas.pack(fill='both', expand=True, side='left')
+            scroll_y.pack(fill='y', side='right')
+        else:
+            teacher1_button = tk.Button(self,
+                text=concat[0],
+                command=lambda:assign_and_next_frame(concat[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            teacher1_button.pack(pady=10)
+
+            teacher2_button = tk.Button(self,
+                text=concat[1],
+                command=lambda:assign_and_next_frame(concat[1]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
                 
-        teacher1_button = tk.Button(self,
-            text="I am " + concat[0],
-            command=lambda:assign_and_next_frame(concat[0]),
-            relief='raised',
-            borderwidth = 1,
-            width=20,
-            height=1,
-            font=('orbitron',15, 'bold'),
-            fg="#6666CC"
-        )
-        teacher1_button.pack(pady=10)
-
-        teacher2_button = tk.Button(self,
-            text="I am " + concat[1],
-            command=lambda:assign_and_next_frame(concat[1]),
-            relief='raised',
-            borderwidth = 1,
-            width=20,
-            height=1,
-            font=('orbitron',15, 'bold'),
-            fg="#6666CC"
-            
-        )
-        teacher2_button.pack(pady=10)
-
-        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
-        bottom_frame.pack(fill='x',side='bottom')
-
-        # # TODO: Add later
-        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
-        # cse_label = tk.Label(bottom_frame,image=cse_photo)
-        # cse_label.pack(side='left')
-        # cse_label.image = cse_photo
-
-        def tick():
-            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
-            time_label.config(text=current_time)
-            time_label.after(200,tick)
-            
-        time_label = tk.Label(bottom_frame,font=('orbitron',12))
-        time_label.pack(side='right')
-
-        tick()
+            )
+            teacher2_button.pack(pady=10)
 
 class chooseCoursePage(tk.Frame):
-
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#00CC99')
         self.controller = controller
 
         self.controller.title('Course Selection')
-        # self.controller.state('zoomed')
-        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
         heading_label = tk.Label(self,
             text='Course \n Which one are you?',
@@ -138,8 +162,8 @@ class chooseCoursePage(tk.Frame):
         space_label.pack()
 
         def assign_and_next_frame(course_id):
+            global course_to_access_firebase
             course_to_access_firebase = course_id
-            print(course_to_access_firebase)
             controller.show_frame('chooseMarkingPage')
                 
         course1_button = tk.Button(self,
@@ -167,24 +191,6 @@ class chooseCoursePage(tk.Frame):
         )
         course2_button.pack(pady=10)
 
-        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
-        bottom_frame.pack(fill='x',side='bottom')
-
-        # # TODO: Add later
-        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
-        # cse_label = tk.Label(bottom_frame,image=cse_photo)
-        # cse_label.pack(side='left')
-        # cse_label.image = cse_photo
-
-        def tick():
-            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
-            time_label.config(text=current_time)
-            time_label.after(200,tick)
-            
-        time_label = tk.Label(bottom_frame,font=('orbitron',12))
-        time_label.pack(side='right')
-
-        tick()
 
 class chooseMarkingPage(tk.Frame):
 
@@ -193,8 +199,6 @@ class chooseMarkingPage(tk.Frame):
         self.controller = controller
 
         self.controller.title('Option Selection')
-        # self.controller.state('zoomed')
-        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
         heading_label = tk.Label(self,
             text='Option \n Which one you choose?',
@@ -235,34 +239,13 @@ class chooseMarkingPage(tk.Frame):
         )
         cancel_button.pack(pady=10)
 
-        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
-        bottom_frame.pack(fill='x',side='bottom')
-
-        # # TODO: Add later
-        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
-        # cse_label = tk.Label(bottom_frame,image=cse_photo)
-        # cse_label.pack(side='left')
-        # cse_label.image = cse_photo
-
-        def tick():
-            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
-            time_label.config(text=current_time)
-            time_label.after(200,tick)
-            
-        time_label = tk.Label(bottom_frame,font=('orbitron',12))
-        time_label.pack(side='right')
-
-        tick()
 
 class chooseCameraPage(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#00CC99')
         self.controller = controller
 
         self.controller.title('Webcam view')
-        # self.controller.state('zoomed')
-        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
         label = tk.Label(self)#, width=145, height=200)
         label.pack(pady=2)
@@ -282,6 +265,7 @@ class chooseCameraPage(tk.Frame):
         video_stream()
 
         def assign_and_next_frame():
+            global path_to_img
             _, img = cap.read()
             cv2.imwrite('capture/capture.png', img)
             path_to_img = "capture/capture.png"
@@ -298,37 +282,15 @@ class chooseCameraPage(tk.Frame):
             font=('orbitron',15, 'bold'),
             fg="#6666CC"
         )
-        marking_button.pack(pady=1)
-
-        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
-        bottom_frame.pack(fill='x',side='bottom')
-
-        # # TODO: Add later
-        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
-        # cse_label = tk.Label(bottom_frame,image=cse_photo)
-        # cse_label.pack(side='left')
-        # cse_label.image = cse_photo
-
-        def tick():
-            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
-            time_label.config(text=current_time)
-            time_label.after(200,tick)
-            
-        time_label = tk.Label(bottom_frame,font=('orbitron',12))
-        time_label.pack(side='right')
-
-        tick()
+        marking_button.pack(pady=10)
 
 
 class chooseCapturePage(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#00CC99')
         self.controller = controller
 
         self.controller.title('Capture view')
-        # self.controller.state('zoomed')
-        #self.controller.iconphoto(False,tk.PhotoImage(file='C:/Users/urban boutique/Documents/atm tutorial/atm.png'))
 
         label = tk.Label(self) #, width=145, height=200)
         label.pack(pady=2)
@@ -336,17 +298,16 @@ class chooseCapturePage(tk.Frame):
         self.text = tk.StringVar()
         
         def image_change():
-            image_cv2 = cv2.imread("capture/capture.png")
+            image_cv2 = cv2.imread("data/word2.png")#"capture/capture.png")
             gray = cv2.cvtColor(image_cv2, cv2.COLOR_BGR2GRAY)
             self.blurry = cv2.Laplacian(gray, cv2.CV_64F).var()
             if self.blurry >= 300:
                 text = "{} - Not blur - Continue".format(int(self.blurry))
             else:
                 text = "{} - Blur - Recapture".format(int(self.blurry))
-            # print(self.blurry)
             
             self.text.set(text)
-            image = Image.open("capture/capture.png")
+            image = Image.open("data/word2.png")
             image = image.resize((268, 201))
             test = ImageTk.PhotoImage(image)
             label.image = test
@@ -356,9 +317,14 @@ class chooseCapturePage(tk.Frame):
         image_change()
 
         def assign_and_next_frame(blurry, threshold=300):
-            
+            global answer_marking
+            global done
             if blurry >= threshold:
-                controller.show_frame('chooseTeacherPage') # Next frame
+                controller.show_frame('chooseDisplayPointPage') # Next frame
+                ls = ['data/word.png', 'data/word1.png', 'data/word2.png']
+                answer_marking = infer(model, ls)
+                done = True
+                print(answer_marking)
             else:
                 controller.show_frame('chooseCameraPage') # Capture frame
 
@@ -373,29 +339,86 @@ class chooseCapturePage(tk.Frame):
             font=('orbitron',15, 'bold'),
             fg="#6666CC"
         )
-        marking_button.pack(pady=1)
+        marking_button.pack(pady=10)
 
-        bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)
-        bottom_frame.pack(fill='x',side='bottom')
 
-        # # TODO: Add later
-        # cse_photo = tk.PhotoImage(file='image/cse_r.png')
-        # cse_label = tk.Label(bottom_frame,image=cse_photo)
-        # cse_label.pack(side='left')
-        # cse_label.image = cse_photo
 
-        def tick():
-            current_time = time.strftime('%I:%M %p').lstrip('0').replace(' 0',' ')
-            time_label.config(text=current_time)
-            time_label.after(200,tick)
-            
-        time_label = tk.Label(bottom_frame,font=('orbitron',12))
-        time_label.pack(side='right')
+class chooseDisplayPointPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent,bg='#00CC99')
+        self.controller = controller
 
-        tick()
+        self.controller.title('Point Display')
 
+        self.points = tk.StringVar()
+        self.points.set("Marking\n Please wait")
+        self.points_num = 0
+        space_label1 = tk.Label(self,height=1,bg='#00CC99')
+        space_label1.pack()
+
+        heading_label = tk.Label(self,
+            # text='Marking',
+            textvariable=self.points,
+            font=('orbitron', 30,'bold'),
+            foreground='#ffffff',
+            background='#00CC99'
+        )
+        heading_label.pack(pady=10)
+
+        space_label = tk.Label(self,height=1,bg='#00CC99')
+        space_label.pack()
+
+        def func():
+            global done
+            while True:
+                time.sleep(1)
+                if done == True:
+                    for i in range(min(len(answer), len(answer_marking))):
+                        if answer[i] == answer_marking[i]:
+                            self.points_num += 1
+                    self.points.set('Result:\n' + str(self.points_num) + ' / ' + str(len(answer)))
+                    done = False
+                    print("end")
+                    break
+        
+        self.t1 = Thread(target=func)
+        # self.t1.start()
+
+        def assign_and_next_frame():
+            # self.t1.join()
+            controller.show_frame('chooseTeacherPage') # Next frame
+        
+        def camera_frame():
+            # self.t1.join()
+            controller.show_frame('chooseCameraPage') # Next frame
+
+                
+        marking_button = tk.Button(self,
+            text="Upload to Server",
+            command=lambda:assign_and_next_frame(),
+            relief='raised',
+            borderwidth = 1,
+            width=20,
+            height=1,
+            font=('orbitron',15, 'bold'),
+            fg="#6666CC"
+        )
+        marking_button.pack(pady=10)
+
+        mark_another_button = tk.Button(self,
+            text="Mark another",
+            command=lambda:camera_frame(),
+            relief='raised',
+            borderwidth = 1,
+            width=20,
+            height=1,
+            font=('orbitron',15, 'bold'),
+            fg="#6666CC"
+        )
+        mark_another_button.pack(pady=10)
 
 if __name__ == "__main__":
     app = App()
     app.geometry('480x280')
     app.mainloop()
+    print(user_to_access_firebase, path_to_img, answer_marking, done)

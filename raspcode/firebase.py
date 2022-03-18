@@ -13,7 +13,7 @@ db = firestore.client()
 # How to select, all teacher ID is store in dictionary: TeacherID - ID on Firestore
 # TODO: Code with tktiner client
 
-select_teacher = db.collection('teacher')
+select_teacher = db.collection('TEACHER')
 teachers = select_teacher.stream()
 
 # id_list store id on firebase
@@ -25,15 +25,10 @@ for teacher in teachers:
     id_list.append(teacher.id)
     dict_list.append(teacher.to_dict())
 
-# Flatten dictionary to string
 concat = []
-for i in dict_list:
-    concat.append(i['name'] + ' - ' + i['id'])
-
-# Create dictionary of string and id on firebase
-# Demo: {'Tien - Teach1': 'KuUgdSdWGpTrVHloCphbw5YA8A62'}
-select_firestore = dict(zip(concat, id_list))
-
+for i in range(len(id_list)):
+    concat.append(id_list[i] + ' - ' + dict_list[i]['T_Name'])
+print(concat)
 """----------------------------------------------------------------------------------------------------"""
 # Select subject, to retrieve the marking result on database
 # Display format: Semester - Class - Name of subject
@@ -42,9 +37,9 @@ select_firestore = dict(zip(concat, id_list))
 # TODO: Code with tktiner client
 
 # Global variable
-user_to_access_firebase = "KuUgdSdWGpTrVHloCphbw5YA8A62"
+user_to_access_firebase = "101"
 
-select_course = db.collection('teacher').document(user_to_access_firebase).collection('course')
+select_course = db.collection('TEACHER').document(user_to_access_firebase).collection('COURSE')
 courses = select_course.stream()
 course_list = []
 for course in courses:
@@ -52,13 +47,13 @@ for course in courses:
 
 # Global variable
 course_to_access_firebase = course_list[0]
+print(course_to_access_firebase)
+# answer_ref = db.collection('teacher').document(user_to_access_firebase).collection('course').document(course_to_access_firebase)
 
-answer_ref = db.collection('teacher').document(user_to_access_firebase).collection('course').document(course_to_access_firebase)
+# # To check with recognized answer
+# answer = answer_ref.get().to_dict()['answer']
 
-# To check with recognized answer
-answer = answer_ref.get().to_dict()['answer']
-
-print(answer)
+# print(answer)
 
 
 """----------------------------------------------------------------------------------------------------"""
