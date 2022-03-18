@@ -142,6 +142,7 @@ class chooseTeacherPage(tk.Frame):
             )
             teacher2_button.pack(pady=10)
 
+
 class chooseCoursePage(tk.Frame):
     
     def __init__(self, parent, controller):
@@ -340,7 +341,6 @@ class chooseCapturePage(tk.Frame):
             fg="#6666CC"
         )
         marking_button.pack(pady=10)
-
 
 
 class chooseDisplayPointPage(tk.Frame):
