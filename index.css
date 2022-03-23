@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box;
+  
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+  html, body{
+    margin: 0;
+    padding: 0;
+    /* width: 100%;
+    height: 100vh; */
+
+  }
+.index_nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding-top: 25px;
+    
+}
+
+a{
+text-decoration: none;
+cursor: pointer;
+}
+.index_nav_options{
+    display: flex;
+    column-gap: 20px
+    ;
+}
+.index_nav_options_home, .index_nav_options_course, .index_nav_options_about{
+    color: whitesmoke ;
+    font-size: 22px;
+
+    padding: 11px 15px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 300ms;
+    font-weight: 500;
+}
+
+.index_nav_options_home:hover, .index_nav_options_course:hover, .index_nav_options_about:hover{
+    border-color: white;
+
+}
+
+.index_nav_login{
+    font-size: 22px;
+    color: whitesmoke ;
+    background-color: #7971ea;
+    transition: background-color 300ms;
+    padding: 14px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.index_nav_login:hover{
+    background-color: #0d0cb5;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    background-image: url("images/hero_1.jpg.webp");
+    background-position:center ;
+    background-size: cover;
+    z-index: -1;
+}
+.Visual_layer{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(52, 58, 64,0.6);
+    
+    height: 100%;
+}
+.index_body{
+    display: flex;
+    
+    max-width: 960px;
+    margin: auto;
+
+}
+
+.index_body_description{
+    margin-top: 20px;
+    max-width: 50%;
+    flex: 0 0 50%;
+    color: whitesmoke;
+}
+.Intro_Header{
+    font-size:25px;
+    font-weight: 800;
+}
+.Intro_details{
+    font-weight: lighter;
+    color: rgba(255, 255, 255, 0.795);
+    font-size: 1.1rem;
+
+}
+.index_body_form{
+    background-color: white;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 7px;
+
+}
+.index_body_form_header{
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.SignUp_Button{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    color: #fff;
+    background-color: #7971ea;
+    border-color: #7971ea;
+    border-radius: 30px;
+    padding: 14px 30px;
+    transition: background-color 300ms;
+}
+
+.SignUp_Button:hover{
+    background-color: #0d0cb5;
+}
+
+.index_body_form_inputs{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    
+    
+}
+
+.email, .password{
+    height: 48px;
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+.Contain_form{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 41.66667%;
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.index_nav_logo{
+    color: whitesmoke;
+}
+.Logo_image{
+    width: 80px;
+    height: 80px;   
+    position: relative;
+    background-image: url(Images/logo8.png);
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+  
