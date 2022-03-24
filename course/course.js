@@ -69,7 +69,7 @@ onSnapshot(colRef, async (snapshot) => {
   Classes.sort(function (a, b) {
     return b.Last_Access - a.Last_Access;
   });
-  console.log("Classes: ", Classes);
+  console.log("Classes: ", String(Classes[0].Create_Date).split("(")[0]);
 
   for (let i = 0; i < Classes.length; i++) {
     document.getElementById("--T-body").innerHTML += `
@@ -82,8 +82,8 @@ onSnapshot(colRef, async (snapshot) => {
           " - " +
           Classes[i].Semester
         }</td>
-        <td>${Classes[i].Create_Date}</td>
-        <td>${Classes[i].Last_Access}</td>
+        <td>${String(Classes[0].Create_Date).split("(")[0]}</td>
+        <td>${String(Classes[0].Last_Access).split("(")[0]}</td>
       </tr>
     `;
   }
@@ -103,18 +103,19 @@ function addRowHandlers(tableId) {
     var Semester = "";
     var Create_Date = "";
     var Last_Access = "";
-
     for (let i = 1; i < rows.length; i++) {
       rows[i].i = i;
+      console.log(table.rows[i].cells[1].innerHTML)
       rows[i].onclick = function () {
         T_id = table.rows[this.i].cells[0].innerHTML;
         var temp = table.rows[this.i].cells[1].innerHTML;
-        console.log(temp);
+        //console.log(temp);
         C_name = temp.substr(0, temp.indexOf(" - "));
         Class_name = temp.slice(
           C_name.length + 3,
           temp.indexOf(" - ", C_name.length + 3)
         );
+        //console.log(Class_name)
         Semester = temp.substr(
           C_name.length + 3 + Class_name.length + 3,
           temp.length
