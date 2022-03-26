@@ -15,8 +15,29 @@ import {
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
+
+
+//Sign Out
+
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
+
+// SignOut Button 
+const auth = getAuth()
+const  logout = document.querySelector('#Logout')
+logout.addEventListener('click', (e) => {
+  e.preventDefault();
+  const user = auth.currentUser;
+  let uid = user.uid;
+  console.log(uid)
+  signOut(auth).then(() => {
+    alert("user : " + uid + "have just logout");
+    window.location = '../index.html'
+  })
+})
+
+
 const db = getFirestore();
-const colRef = collection(db, "TEACHER");
+const colRef = collection(db, "Sample_Teacher");
 
 // Get variable
 var teacher_id = localStorage.getItem("T_id");
@@ -28,12 +49,14 @@ var semester = localStorage.getItem("Semester");
 // Update last_access
 const laRef = doc(
   db,
-  "TEACHER",
+  "Sample_Teacher",
   teacher_id,
   "COURSE",
   course_name,
   "CLASS",
-  class_name
+  class_name,
+  "SEMESTER",
+  semester
 );
 updateDoc(laRef, { last_access: serverTimestamp() });
 
@@ -53,20 +76,22 @@ onSnapshot(colRef, async (snapshot) => {
     " - " +
     Classes[0].Class_name +
     " - " +
-    Classes[0].Semester +
-    ")"
+    Classes[0].Semester 
   }`;
   var Score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // so luong hoc sinh co diem tu 0 -> 10
   await getDocs(
     collection(
       db,
-      "TEACHER",
+      "Sample_Teacher",
       Classes[0].T_id,
       "COURSE",
       Classes[0].C_name,
       "CLASS",
       Classes[0].Class_name,
-      "STUDENT"
+      "SEMESTER",
+      Classes[0].Semester,
+      "STUDENT",
+
     )
   ).then((snapshot) => {
     snapshot.docs.forEach((doc) => {
@@ -151,6 +176,7 @@ function Draw_Pie(yValues) {
   console.log(yValues);
   console.log(arr);
   var data = google.visualization.arrayToDataTable(arr);
+  //console.log(data);
   var options = {
     title:
       "Distribution of mark in class: " +
@@ -160,7 +186,7 @@ function Draw_Pie(yValues) {
       " - " +
       Classes[0].Semester,
     height: 400,
-    width_units: "%",
+    //width_units: "%",
   };
 
   var my_div = document.getElementById("piechart");
@@ -170,6 +196,7 @@ function Draw_Pie(yValues) {
   google.visualization.events.addListener(chart, "ready", function () {
     my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
   });
+  console.log("abc" + my_div.innerHTML);
   chart.draw(data, options);
   console.log("done");
 }

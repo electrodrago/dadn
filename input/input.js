@@ -8,7 +8,7 @@ import {
   } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js'
 
   const db = getFirestore();
-  const colRef = collection(db, 'teacher');
+  const colRef = collection(db, 'Sample_Teacher');
 
   
   Add.addEventListener('click', (e) => {
@@ -31,17 +31,19 @@ import {
               lst.push(results.data[i].Key);
         }
         console.log(Object.values(lst));
-        setDoc(doc(db,'teacher', teacher_id),{});
-        setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name),{});
-        setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name),{});
-        setDoc(doc(db,'teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name), {
+        setDoc(doc(db,'Sample_Teacher', teacher_id),{});
+        setDoc(doc(db,'Sample_Teacher', teacher_id, 'COURSE', course_name),{});
+        setDoc(doc(db,'Sample_Teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name),{});
+        setDoc(doc(db,'Sample_Teacher', teacher_id, 'COURSE', course_name, 'CLASS',class_name, 'SEMESTER', semester), {
           AnswerFile: lst,
-          Class_Semester: semester,
           create: new Date(),
           lass_access: new Date(),
           })
         .then(() => {
-          document.querySelector('.form-group').reset();
+          var InputAray = document.querySelectorAll('form-group');
+          InputAray.forEach(function (input){
+            input.value = ""
+          });
         })
         
       }
