@@ -14,8 +14,24 @@ import {
   setDoc,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
+
+// SignOut Button 
+const auth = getAuth()
+const  logout = document.querySelector('#Logout')
+logout.addEventListener('click', (e) => {
+  e.preventDefault();
+  const user = auth.currentUser;
+  let uid = user.uid;
+  // console.log(uid)
+  signOut(auth).then(() => {
+    alert("user : " + uid + "have just logout");
+    window.location = '../index.html'
+  })
+})
+
 const db = getFirestore();
-const colRef = collection(db, "TEACHER");
+const colRef = collection(db, "Sample_Teacher");
 
 onSnapshot(colRef, async (snapshot) => {
   let teachers = [];
@@ -26,7 +42,7 @@ onSnapshot(colRef, async (snapshot) => {
   let courses = [];
   //   var did;
   for (let i = 0; i < teachers.length; i++) {
-    await getDocs(collection(db, "TEACHER", teachers[i], "COURSE")).then(
+    await getDocs(collection(db, "Sample_Teacher", teachers[i], "COURSE")).then(
       (snapshot) => {
         //console.log(snapshot.docs);
         snapshot.docs.forEach(async (doc) => {
@@ -43,11 +59,12 @@ onSnapshot(colRef, async (snapshot) => {
     await getDocs(
       collection(
         db,
-        "TEACHER",
+        "Sample_Teacher",
         courses[i].T_id,
         "COURSE",
         courses[i].C_name,
         "CLASS"
+        
       )
     ).then((snapshot) => {
       snapshot.docs.forEach((doc) => {
@@ -56,34 +73,65 @@ onSnapshot(colRef, async (snapshot) => {
           T_id: courses[i].T_id,
           C_name: courses[i].C_name,
           Class_name: doc.id,
-          Semester: doc.data().Class_Semester,
-          Last_Access: doc.data().last_access.toDate(),
-          Create_Date: doc.data().create.toDate(),
+          // Semester: doc.data().Class_Semester,
+          // Last_Access: doc.data().last_access.toString(),
+          // Create_Date: doc.data().create,
         });
-        //  console.log(doc)
+          //console.log(doc.data().last_access)
       });
     });
 
     //   getDocs(collection(db, 'TEACHER', courses[i].T_id, 'COURSE', courses[i].T_id))
   }
-  Classes.sort(function (a, b) {
+
+let Semesters = []
+
+for( let i = 0 ; i < Classes.length; i++){
+  await getDocs(
+    collection(
+      db, 
+      "Sample_Teacher",
+      Classes[i].T_id,
+      "COURSE",
+      Classes[i].C_name,
+      "CLASS",
+      Classes[i].Class_name,
+      "SEMESTER"
+    )
+  ).then((snapshot) => {
+    snapshot.docs.forEach((doc) =>{
+      Semesters.push({
+        T_id:Classes[i].T_id,
+        C_name: Classes[i].C_name,
+        Class_name: Classes[i].Class_name,
+        Semester: doc.id,
+        Last_Access: doc.data().lass_access.toDate(),
+        Create_Date: doc.data().create.toDate(),
+      })
+      // console.log(doc.data().create)
+    } )
+    console.log("semes: " + Classes)
+  })
+}
+
+  Semesters.sort(function (a, b) {
     return b.Last_Access - a.Last_Access;
   });
-  console.log("Classes: ", String(Classes[0].Create_Date).split("(")[0]);
+  // console.log("Classes: ", String(Classes[0].Create_Date).split("(")[0]);
 
   for (let i = 0; i < Classes.length; i++) {
     document.getElementById("--T-body").innerHTML += `
       <tr>
-        <td>${Classes[i].T_id}</td>
+        <td>${Semesters[i].T_id}</td>
         <td>${
-          Classes[i].C_name +
+          Semesters[i].C_name +
           " - " +
-          Classes[i].Class_name +
+          Semesters[i].Class_name +
           " - " +
-          Classes[i].Semester
+          Semesters[i].Semester
         }</td>
-        <td>${String(Classes[0].Create_Date).split("(")[0]}</td>
-        <td>${String(Classes[0].Last_Access).split("(")[0]}</td>
+        <td>${String(Semesters[0].Create_Date).split("(")[0]}</td>
+        <td>${String(Semesters[0].Last_Access).split("(")[0]}</td>
       </tr>
     `;
   }

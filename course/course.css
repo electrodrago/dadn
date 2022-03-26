@@ -75,6 +75,7 @@ nav {
   top: -20px;
   width: 80px;
   height: 60px;
+
   position: relative;
   background-image: url(../Images/logo8.png);
   display: inline-block;
@@ -179,7 +180,7 @@ table tr {
 @media screen and (max-width: 506px) {
   .index_nav_options_about {
     padding-right: 0px;
-    padding-left: 0px;
+    padding-left: 20px;
   }
   .index_nav_options_home {
     padding-left: 0px;
