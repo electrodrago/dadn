@@ -22,7 +22,6 @@ teachers = select_teacher.stream()
 
 teacher_id = []
 teacher_infor = []
-
 for teacher in teachers:
     teacher_id.append(teacher.id)
     teacher_infor.append(teacher.to_dict())
@@ -42,7 +41,7 @@ print("teacher_id and teacher_name :", concat)
 # # TODO: Code with tktiner client
 
 # # Global variable
-user_to_access_firebase = "2053373"
+user_to_access_firebase = "1952493"
 
 
 def getCourses(teacher_id):
@@ -62,7 +61,7 @@ print(course_list)
 
 
 # # Global variable
-course_to_access_firebase = course_list[1]
+course_to_access_firebase = course_list[0]
 
 def getClasses(teacher_id, Course_name):
     select_class = db.collection(
@@ -119,11 +118,24 @@ def getAnswerfile(teacher_id, coure_name, class_id,semester):
 answer = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).get().to_dict()['AnswerFile']
 print(answer)
 
-# # Upload to server
-# # Global variable
-# student_id = 'AAA'
-# point = 8
 
+
+
+# Upload to server
+# Global variable
+student_id = 'AAA'
+point = 8
+
+# def check(collection_ref):
+#     docs = collection_ref.stream();
+#     if(len(reduce(lambda acc, ele: acc + [ele.id], docs, [])) == 0):
+#         return False
+#     return True
+
+student_ref = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT')
+# is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
+student_ref.document(student_id).set({'S_Point': point})
+# print(len(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT').stream()))
 # answer_ref.collection('STUDENT').document(student_id).set({'S_Point': point})
 # """----------------------------------------------------------------------------------------------------"""
 # # Button start marking or cancel, start making will display a client with camera view
