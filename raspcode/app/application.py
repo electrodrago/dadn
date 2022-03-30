@@ -16,7 +16,7 @@ model = Model(char_list_from_file())
 
 # Variable for test application
 concat = ['101 - Nguyen Quoc Viet', '102 - Bang Ngoc Bao Tam', "103 - Trinh Manh Hung"]
-course_list = ['Calculus 1', 'Calculus 2']
+course_list = ['Calculus 1', 'Calculus 2', "as"]
 class_list = ['CC01']
 # Global variable that change when click button of tkinter
 user_to_access_firebase = ""
@@ -117,7 +117,7 @@ class chooseTeacherPage(tk.Frame):
                             
             canvas.pack(fill='both', expand=True, side='left')
             scroll_y.pack(fill='y', side='right')
-        else:
+        elif len(concat) == 2:
             teacher1_button = tk.Button(self,
                 text=concat[0],
                 command=lambda:assign_and_next_frame(concat[0]),
@@ -142,6 +142,18 @@ class chooseTeacherPage(tk.Frame):
                 
             )
             teacher2_button.pack(pady=10)
+        else:
+            teacher1_button = tk.Button(self,
+                text=concat[0],
+                command=lambda:assign_and_next_frame(concat[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=25,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            teacher1_button.pack(pady=10)
 
 
 class chooseCoursePage(tk.Frame):
@@ -167,31 +179,77 @@ class chooseCoursePage(tk.Frame):
             global course_to_access_firebase
             course_to_access_firebase = course_id
             controller.show_frame('chooseClassPage')
-                
-        course1_button = tk.Button(self,
-            text="Course name: " + course_list[0],
-            command=lambda:assign_and_next_frame(course_list[0]),
-            relief='raised',
-            borderwidth = 1,
-            width=20,
-            height=1,
-            font=('orbitron',15, 'bold'),
-            fg="#6666CC"
-        )
-        course1_button.pack(pady=10)
 
-        course2_button = tk.Button(self,
-            text="Course name: " + course_list[1],
-            command=lambda:assign_and_next_frame(course_list[1]),
-            relief='raised',
-            borderwidth = 1,
-            width=20,
-            height=1,
-            font=('orbitron',15, 'bold'),
-            fg="#6666CC"
+        if len(course_list) > 2:
+            canvas = tk.Canvas(self, bg='#00CC99')
+            scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
             
-        )
-        course2_button.pack(pady=10)
+            frame = tk.Frame(canvas, bg='#00CC99')
+            # Add buttons
+            lst_btn = []
+            for i in range(len(course_list)):
+                text_display = course_list[i]
+                course_button = tk.Button(frame,
+                    text=text_display,
+                    command=lambda j=text_display: assign_and_next_frame(j),
+                    relief='raised',
+                    borderwidth = 1,
+                    width=25,
+                    height=1,
+                    font=('orbitron',15, 'bold'),
+                    fg="#6666CC"
+                )
+                lst_btn.append(course_button)
+            for i in lst_btn:
+                i.pack(pady=20, padx=75)
+            
+            # Create canvas for scrolling
+            canvas.create_window(0, 0, window=frame)
+            canvas.update_idletasks()
+
+            canvas.configure(scrollregion=canvas.bbox('all'), 
+                            yscrollcommand=scroll_y.set)
+                            
+            canvas.pack(fill='both', expand=True, side='left')
+            scroll_y.pack(fill='y', side='right')
+        elif len(course_list) == 2:
+            course1_button = tk.Button(self,
+                text="Course name: " + course_list[0],
+                command=lambda:assign_and_next_frame(course_list[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=20,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            course1_button.pack(pady=10)
+
+            course2_button = tk.Button(self,
+                text="Course name: " + course_list[1],
+                command=lambda:assign_and_next_frame(course_list[1]),
+                relief='raised',
+                borderwidth = 1,
+                width=20,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+                
+            )
+            course2_button.pack(pady=10)
+        else:
+            course1_button = tk.Button(self,
+                text="Course name: " + course_list[0],
+                command=lambda:assign_and_next_frame(course_list[0]),
+                relief='raised',
+                borderwidth = 1,
+                width=20,
+                height=1,
+                font=('orbitron',15, 'bold'),
+                fg="#6666CC"
+            )
+            course1_button.pack(pady=10)
+
 
 
 class chooseClassPage(tk.Frame):
@@ -357,7 +415,7 @@ class chooseCameraPage(tk.Frame):
             imgtk = ImageTk.PhotoImage(image=img)
             label.imgtk = imgtk
             label.configure(image=imgtk)
-            label.after(1, video_stream)
+            label.after(1000, video_stream)
         
         video_stream()
 
