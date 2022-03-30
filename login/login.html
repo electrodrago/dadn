@@ -1,64 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="login.css" >
-    
-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
-    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<link rel="stylesheet" href="login.css">
+
+	<link rel="mask-icon" type="image/x-icon"
+		href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+		color="#111">
+	<link rel="shortcut icon" type="image/x-icon"
+		href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
-<body>  
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#" id="create_account_fire">
-			<h1>Create Account</h1>
-			<!-- <div class="social-container">
+
+<body>
+	<div class="container" id="container">
+		<div class="form-container sign-up-container">
+			<form action="#" id="create_account_fire">
+				<h1>Create Account</h1>
+				<!-- <div class="social-container">
 				<a href="#" class="social"><img src="icons/facebook.svg" alt="" class="icon"></a>
 				<a href="#" class="social"><img src = "icons/gmail-icon.svg" class="icon"></img></a>
 				<a href="#" class="social"><img src="icons/icons8-linkedin.svg" class ="icon" ></img></a>
 			</div> -->
-			<!-- <span>or use your email for registration</span> -->
-			<input type="text" placeholder="username" id="submit_username_create"/>
-			<input type="email" placeholder="E-mail" id="submit_email_create"/>
-			<input type="password" placeholder="Password" id="submit_pass_create" />
-			<button type="submit" id="SignUp">Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="#" id="sign_in_fire">
-			<h1>Sign in</h1>
-			<!-- <div class="social-container">
+				<!-- <span>or use your email for registration</span> -->
+				<input type="text" placeholder="username" id="submit_username_create" />
+				<input type="email" placeholder="E-mail" id="submit_email_create" />
+				<input type="password" placeholder="Password" id="submit_pass_create" />
+				<button type="submit" id="SignUp">Sign Up</button>
+			</form>
+		</div>
+		<div class="form-container sign-in-container">
+			<form action="#" id="sign_in_fire">
+				<h1>Sign in</h1>
+				<!-- <div class="social-container">
 				<a href="#" class="social"><img src="icons/facebook.svg" alt="" class="icon"></a>
 				<a href="#" class="social"><img src = "icons/gmail-icon.svg" class="icon"></img></a>
 				<a href="#" class="social"><img src="icons/icons8-linkedin.svg" class ="icon" ></img></a>
 			</div>
 			<span>or use your account</span> -->
-			<input type="email" placeholder="Email" id="submit_email_signin"/>
-			<input type="password" placeholder="Password" id="submit_pass_signin"/>
-			<a href="#">Forgot your password?</a>
-			<button type="submit" id="SignIn">Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
+				<input type="email" placeholder="Email" id="submit_email_signin" />
+				<input type="password" placeholder="Password" id="submit_pass_signin" />
+				<a href="#">Forgot your password?</a>
+
+				<button type="submit" id="SignIn">
+					<a>Sign In</a>
+				</button>
+
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hello, Friend!</h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- <footer>
+	<!-- <footer>
 	<p>
 		Created with <i class="fa fa-heart"></i> by
 		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
@@ -67,117 +76,13 @@
 	</p>
 </footer> -->
 
-<!--Firebase here-->
-
-<script type="module">
-	// Import the functions you need from the SDKs you need
-	import app from "../firebase.js"
-	// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-	import { getDatabase, set, ref, update} from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js';
-	import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword , onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
-	// import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js'
-    // import { getFirestore  } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js'
-	// TODO: Add SDKs for Firebase products that you want to use
-	// https://firebase.google.com/docs/web/setup#available-libraries
-  
-	// Your web app's Firebase configuration
-	// const firebaseConfig = {
-	//   apiKey: "AIzaSyDy0vFrfvuXoi4xEa9zi7qlkNFy3haRtOI",
-	//   authDomain: "dadn-6c126.firebaseapp.com",
-	//   projectId: "dadn-6c126",
-	//   storageBucket: "dadn-6c126.appspot.com",
-	//   messagingSenderId: "768299472042",
-	//   appId: "1:768299472042:web:2bbf97516e7c06e092ecd3"
-	// };
-  
-	// Initialize Firebase
-	// const app = initializeApp(firebaseConfig);
-	const database = getDatabase(app);
-	const auth = getAuth()
-	SignUp.addEventListener('click',(e) => {
-		var email = document.getElementById('submit_email_create').value;
-		var password = document.getElementById('submit_pass_create').value;
-		var username = document.getElementById('submit_username_create').value;
-createUserWithEmailAndPassword(auth, email, password)
-  .then(async(userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-	console.log("nam");
-	const dt = new Date();
-	await set(ref(database, 'users/' + user.uid),{
-		username: username,
-		email: email,
-		status: true,
-		last_login:dt
-	})
-
-	alert('user created!');
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-	alert(errorMessage)
-    // ..
-  });
-	});
-SignIn.addEventListener('click', (e) => {
-	var email = document.getElementById('submit_email_signin').value;
-	var password = document.getElementById('submit_pass_signin').value;
-
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-
-	const dt = new Date();
-	update(ref(database, 'users/' + user.uid),{
-		last_login: dt,
-		status: true
-	})
-
-	alert('User loged in!');
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-	alert(errorMessage);
-  });
-})
-console.log(auth.currentUser)
-onAuthStateChanged(auth, (user) => {
-            if(user){
-                console.log("nam in here")
-
-            	window.location = '../homepage2/index2.html';
-            }
-            else{
-                console.log("nam not in here")
-            }
-})
-const delete_user = auth.currentUser;
+	<!--Firebase here-->
 
 
+<script src="./login.js" type="module">
 
 
-// onAuthStateChanged(auth, (user) => {
-//   if(user){
-// 	  console.log("nam in here");
-// 	  window.location = '../homepage2/index2.html';
-//   }
-//   else{
-//   }
-// })
-
-
-	// Make auth, firestore
-	// const auth = getAuth();
-	// const db = getFirestore();
-  </script>
-
-<script type="module" src="login.js"></script>
+	</script>
 </body>
+
 </html>

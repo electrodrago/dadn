@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Smart Marking Website</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="../css/style.min.css">
+    <link rel="stylesheet" href="./profile.css">
+    <style>
+        @media (min-height: 300px) {
+            nav ul {
+                position: sticky;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="grey lighten-3">
+    <script src="./profile.js" type="module"></script>
+    <!--Main Navigation-->
+    <header>
+
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar navbar-toggler"
+            style="background-color: #e5ecf1;">
+            <div class="container-fluid">
+                <div class="Nav_bar_Logo">
+                    <a href="" title="Go to HomePage" class="Logo_return">
+                        <!-- <img src="/Images/logo7.png" alt="" style="height: 70px; width: 50px;"> -->
+                        <div class="logo_image"> </div>
+                    </a>
+                </div>
+                <div class="index_nav_options">
+                    <a class="index_nav_options_home" href="../course/course.html">
+                        <p style="font-weight: 500;"> HOME</p>
+                    </a>
+                    <a class="index_nav_options_course" href="../course/course.html">
+                        <p>COURSE</p>
+                    </a>
+                    <a class="index_nav_options_about" href="">
+                        <p>ABOUT</p>
+                    </a>
+
+                </div>
+                <a class="Nav_bar_Logout">
+                    <p>Logout</p>
+                </a>
+            </div>
+        </nav>
+        <!-- Navbar -->
+
+        <!-- Sidebar -->
+        <div class="sidebar-fixed position-fixed" style="background-color: #eff1f5; border-color: #cac2c2;">
+            <a class="logo-wrapper waves-effect">
+                <img src="../Images/logo8.png" class="img-fluid" alt="" style="height: 60px; width: 60px;">
+            </a>
+            <br>
+            <div class="list-group list-group-flush">
+                <a href="../dashboard/dashboard.html" class="list-group-item waves-effect">
+                    <i class="fas fa-chart-pie mr-3"></i>Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active waves-effect">
+                    <i class="fas fa-user mr-3"></i>Profile</a>
+            </div>
+
+        </div>
+        <!-- Sidebar -->
+
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <div class="body_container">
+        <main class="pt-5 mx-lg-5">
+            <div class="container-fluid mt-5">
+
+                <!-- Heading -->
+                <div class="card mb-4 wow fadeIn">
+
+                    <!--Card content-->
+                    <div class="card-body d-sm-flex justify-content-between">
+
+                        <h4 class="mb-2 mb-sm-0 pt-1">
+                            Home Page
+                            <span>/</span>
+                            <span>Dashboard</span>
+                            <span>(Course Name: Calculus I )</span>
+                        </h4>
+
+                    </div>
+
+                </div>
+                <!-- Heading -->
+
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+
+                    <!--Grid column-->
+                    <div class="col-md-12 mb-4">
+
+                        <!--Card-->
+                        <div class="card">
+                            <!--Card content-->
+                            <div class="card-header justify-content-center" id="Class-Teacher">
+                                <h5>Teacher Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <table
+                                    class="table table-hover table-striped table-condensed table-responsive justify-content-center">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th>Teacher ID</th>
+                                            <th>Teacher Name</th>
+                                            <th>Teacher Email</th>
+                                            <th>Teacher Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="Teacher-Info">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/.Card-->
+                        <br />
+
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <div class="row wow fadeIn">
+                    <div class="col-md-6 mb-4">
+                        <!--Card-->
+                        <div class="card">
+                            <!--Card content-->
+                            <div class="card-header justify-content-center" id="Class-Teacher">
+                                <h5>Class Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <table
+                                    class="table table-hover table-striped table-condensed table-responsive justify-content-center">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>Course</th>
+                                            <th>Semester</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="Class-Info">
+                                    </tbody>
+                                </table>
+                                <div class="container">
+                                    <table
+                                        class="table table-striped table-condensed table-hover table-responsive justify-content-center">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Question</th>
+                                                <th>Key</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="Key-Info" class="tbody1">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Card-->
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <!--Card content-->
+                            <div class="card-header justify-content-center" id="Class-Teacher">
+                                <h5>Student Score</h5>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="container">
+                                    <table
+                                        class="table table-striped table-condensed table-hover table-responsive justify-content-center">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Student ID</th>
+                                                <th>Point</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="Student-Info" class="tbody1" style="height: 530px;">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Card-->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="page-footer text-center font-small primary-color-dark darken-2 ">
+        <br>
+
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+
+            <a href="https://twitter.com/MDBootstrap" target="_blank">
+                <i class="fab fa-twitter mr-3"></i>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+                <i class="fab fa-youtube mr-3"></i>
+            </a>
+
+            <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+                <i class="fab fa-google-plus mr-3"></i>
+            </a>
+
+            <a href="https://dribbble.com/mdbootstrap" target="_blank">
+                <i class="fab fa-dribbble mr-3"></i>
+            </a>
+
+            <a href="https://pinterest.com/mdbootstrap" target="_blank">
+                <i class="fab fa-pinterest mr-3"></i>
+            </a>
+
+            <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+                <i class="fab fa-github mr-3"></i>
+            </a>
+
+            <a href="http://codepen.io/mdbootstrap/" target="_blank">
+                <i class="fab fa-codepen mr-3"></i>
+            </a>
+        </div>
+        <!-- Social icons -->
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            © 2022 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> HCMUT.com </a>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+    <!-- Charts -->
+    <script>
+        function download_bar() {
+            const imageLink = document.createElement('a');
+            const canvas = document.getElementById('myChart');
+            imageLink.download = 'barchart.png';
+            imageLink.href = canvas.toDataURL('image/png', 1);
+            imageLink.click();
+        }
+        function download_pie() {
+            const imageLink = document.createElement('a');
+            const canvas = document.getElementById('piechart');
+            imageLink.download = 'piechart.png';
+            imageLink.href = canvas.toDataURL('image/png', 1);
+            imageLink.click();
+        }
+    //pie
+        /*
+        var ctxP = document.getElementById("pieChart").getContext('2d');
+        var myPieChart = new Chart(ctxP, {
+          type: 'pie',
+          data: {
+            labels: ["Male", "Female"],
+            datasets: [{
+              data: [21, 19],
+              backgroundColor: ["#F7464A", "#46BFBD"],
+              hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: false
+          }
+        });*/
+    </script>
+
+</body>

@@ -2,9 +2,8 @@
 <html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<body>
-<!DOCTYPE html>
-<html lang="en">
+<script src="https://www.google.com/jsapi"></script>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,71 +12,72 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
+  <link href="../css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="css/style.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.min.css">
   <link rel="stylesheet" href="dashboard.css">
-<style>
-  @media (min-height: 300px) {
-  nav ul {
-    position: sticky;
-    top: 0;
-  }
-}
-</style>
+  <style>
+    @media (min-height: 300px) {
+      nav ul {
+        position: sticky;
+        top: 0;
+      }
+    }
+  </style>
 </head>
 
 <body class="grey lighten-3">
-
+  <script src="./dashboard.js" type="module"></script>
   <!--Main Navigation-->
   <header>
 
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar navbar-toggler" style="background-color: #e5ecf1;">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar navbar-toggler"
+      style="background-color: #e5ecf1;">
       <div class="container-fluid">
-          <div class="Nav_bar_Logo">
-              <a href="" title="Go to HomePage" class="Logo_return">
-                  <!-- <img src="/Images/logo7.png" alt="" style="height: 70px; width: 50px;"> -->
-                  <div class="logo_image">  </div>
-              </a>
-          </div>
-          <div class = "index_nav_options"> 
-              <a class = "index_nav_options_home" href="">
-                  <p style="font-weight: 500;">  HOME</p>
-              </a>
-              <a class = "index_nav_options_course" href="">
-                  <p>COURSE</p>
-              </a>
-              <a class = "index_nav_options_about"  href="">
-                  <p>ABOUT</p>
-              </a>
-  
-          </div>
-          <a class="Nav_bar_Logout">
-            <p>Logout</p>
+        <div class="Nav_bar_Logo">
+          <a href="" title="Go to HomePage" class="Logo_return">
+            <!-- <img src="/Images/logo7.png" alt="" style="height: 70px; width: 50px;"> -->
+            <div class="logo_image"> </div>
           </a>
-      </div>  
-  </nav>
+        </div>
+        <div class="index_nav_options">
+          <a class="index_nav_options_home" href="../index.html">
+            <p style="font-weight: 500;"> HOME</p>
+          </a>
+          <a class="index_nav_options_course" href="../course/course.html">
+            <p>COURSE</p>
+          </a>
+          <a class="index_nav_options_about" href="">
+            <p>ABOUT</p>
+          </a>
+
+        </div>
+        <a class="Nav_bar_Logout" id="Logout" href="../index.html">
+          <p>Logout</p>
+        </a>
+      </div>
+    </nav>
     <!-- Navbar -->
 
     <!-- Sidebar -->
     <div class="sidebar-fixed position-fixed" style="background-color: #eff1f5; border-color: #cac2c2;">
       <a class="logo-wrapper waves-effect">
-        <img src="Images/logo8.png" class="img-fluid" alt="" style="height: 60px; width: 60px;">
+        <img src="../Images/logo8.png" class="img-fluid" alt="" style="height: 60px; width: 60px;">
       </a>
       <br>
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item active waves-effect">
           <i class="fas fa-chart-pie mr-3"></i>Dashboard
         </a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="../profile/profile.html" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-user mr-3"></i>Profile</a>
       </div>
 
     </div>
-    <!-- Sidebar
+    <!-- Sidebar -->
 
   </header>
   <!--Main Navigation-->
@@ -86,136 +86,121 @@
   <div class="body_container">
     <main class="pt-5 mx-lg-5">
       <div class="container-fluid mt-5">
-  
+
         <!-- Heading -->
         <div class="card mb-4 wow fadeIn">
-  
+
           <!--Card content-->
           <div class="card-body d-sm-flex justify-content-between">
-  
+
             <h4 class="mb-2 mb-sm-0 pt-1">
-              <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
-              <span>/</span>
-              <span>Dashboard</span>
-              <span>(Course Name: Calculus I )</span>
+
+              <span id="course_name">Course : </span>
             </h4>
-  
+
           </div>
-  
+
         </div>
         <!-- Heading -->
-  
+
         <!--Grid row-->
         <div class="row wow fadeIn">
-  
+
           <!--Grid column-->
           <div class="col-md-9 mb-4">
-  
+
             <!--Card-->
             <div class="card">
-  
+
               <!--Card content-->
-              
+
               <div class="card-body">
-                
-                  <canvas id="myChart"></canvas>
-                  <button class="btn" onclick="download_bar()"><i class="fa fa-download"></i> Download</button>
-                  <script>
-                      function dynamicColors() {
-                          var r = Math.floor(Math.random() * 255);
-                          var g = Math.floor(Math.random() * 255);
-                          var b = Math.floor(Math.random() * 255);
-                          return "rgba(" + r + "," + g + "," + b + ", 0.6)";
-                      };
-                      function poolColors(a) {
-                          var pool = [];
-                          for(i = 0; i < a; i++) {
-                              pool.push(dynamicColors());
-                          }
-                          return pool;
-                      };
-                      var xValues = ["0 Point", "1 Point", "2 Point", "3 Point", "4 Point", "5 Point", "6 Point", "7 Point", "8 Point", "9 Point", "10 Point"];
-                      var yValues = [4, 4, 3, 4, 6, 10, 18, 20, 15, 10, 4];
-                      var barColors = ["Red", "Green", "Blue", "Yellow"];
-                      new Chart("myChart", {
-                        type: "bar",
-                        data: {
-                          labels: xValues,
-                          datasets: [{
-                            label: "Number of students",
-                            backgroundColor: poolColors(yValues.length),
-                            borderColor: poolColors(yValues.length),
-                            data: yValues
-                          }]
-                        },
-                        options: {
-                          legend: {display: false},
-                          title: {
-                            display: true,
-                            text: "Class 10TH Mark Chart"
-                          }
-                        }
-                      });
-                  </script>
+
+                <canvas id="myChart"></canvas>
+                <button class="btn" onclick="download_bar()"><i class="fa fa-download"></i> Download</button>
+
               </div>
-  
+
             </div>
             <!--/.Card-->
-  
+
           </div>
           <!--Grid column-->
-  
+
           <!--Grid column-->
-          <div class="col-md-3 mb-4">
-  
-            <!--Card-->
+          <!-- <div class="col-md-3 mb-4">
+
             <div class="card mb-4">
-  
-              <!-- Card header -->
+
               <div class="card-header text-center">
                 Male / Female
               </div>
-              <!--Card content-->
               <div class="card-body">
                 <canvas id="pieChart"></canvas>
               </div>
-  
+
             </div>
-            <!--/.Card-->
-  
-  
-          </div>
-          <!--Grid column-->
-  
+
+
+          </div> 
+          Grid column-->
+
         </div>
         <!--Grid row-->
-  
+
         <!--Grid row-->
         <div class="row wow fadeIn">
           <!--Grid column-->
           <div class="col-md-9 mb-4">
-  
-              <!--Card-->
-              <div class="card mb-4">
-    
-                <!-- Card header -->
-                <div class="card-header text-center">
-                  Pie Chart
-                </div>
-                <!--Card content-->
-                <div class="card-body">
+
+            <!--Card-->
+            <div class="card mb-4">
+
+              <!-- Card header -->
+              <div class="card-header text-center">
+                Pie Chart
+              </div>
+              <!--Card content-->
+              <div class="card-body justify-content-center">
+
+                <style>
+                  #chart_wrap {
+                    position: relative;
+                    padding-bottom: 80%;
+                    height: 0;
+                    width: auto;
+                    overflow: hidden;
+                  }
+
+                  #piechart {
+                    position: absolute;
+                    top: 0%;
+                    left: 0;
+                    width: 100%;
+                    height: 500px;
+                  }
+                </style>
+                <div id="chart_wrap">
                   <div id="piechart"></div>
-                  <!-- <a id="download_link" href="" style="display:contents" download="PieChart">Export as Image</a> -->
-                  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  
-                  <script type="text/javascript">
-                    // Load google charts
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
-  
-                    // Draw the chart and set the chart values
-                    function drawChart() {
-                      var data = google.visualization.arrayToDataTable([
+
+                  <script>
+                    //Draw_Pie("ok");
+
+                  </script>
+                </div>
+
+                <!-- <a id="download_link" href="" style="display:contents" download="PieChart">Export as Image</a> -->
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+                <script type="text/javascript">
+                  // Load google charts
+                  /*
+                  google.charts.load('current', { 'packages': ['corechart'] });
+                  google.charts.setOnLoadCallback(drawChart);
+ 
+                  // Draw the chart and set the chart values
+                  function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
                       ['Mark', 'Total of students'],
                       ['0 point', 8],
                       ['1 point', 2],
@@ -229,37 +214,39 @@
                       ['9 point', 8],
                       ['10 point', 3]
                     ]);
-  
-                      // Optional; add a title and set the width and height of the chart
-                      var options = {'title':'Distribution of mark in class', 'width':650, 'height':400};
-                      
-                      // Display the chart inside the <div> element with id="piechart"
-                      var my_div = document.getElementById('piechart');
-                      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                      
-                      /*google.visualization.events.addListener(chart, 'ready', function () {
-                        my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
-                        document.getElementById("download_link").setAttribute("href", chart.getImageURI())
-                        document.getElementById("download_link").click();
-                
-                      });*/
-                      google.visualization.events.addListener(chart, 'ready', function () {
-                        my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
-                        //document.getElementById("download_link").setAttribute("href", chart.getImageURI())
-                        //document.getElementById("download_link").click();
+ 
+                    // Optional; add a title and set the width and height of the chart
+                    var options = {
+                      title: 'Distribution of mark in class', height: 400, width_units: '%'
+                    };
+ 
+                    // Display the chart inside the <div> element with id="piechart"
+                    var my_div = document.getElementById('piechart');
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                  */
+                  /*google.visualization.events.addListener(chart, 'ready', function () {
+                    my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+                    document.getElementById("download_link").setAttribute("href", chart.getImageURI())
+                    document.getElementById("download_link").click();
+            
+                  });*/
+                  /*google.visualization.events.addListener(chart, 'ready', function () {
+                    my_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+                    //document.getElementById("download_link").setAttribute("href", chart.getImageURI())
+                    //document.getElementById("download_link").click();
+ 
+                  });
+                  chart.draw(data, options);
+                  
+                  }*/
+                </script>
 
-                      });
-                      chart.draw(data, options);
-                      
-                    }
-                  </script>
-    
-                </div>
-                <!--/.Card-->
               </div>
-    
+              <!--/.Card-->
             </div>
-            <!--Grid column-->
+
+          </div>
+          <!--Grid column-->
         </div>
         <!--Grid row-->
       </div>
@@ -318,39 +305,24 @@
   </footer>
   <!--/.Footer-->
 
-  <!-- SCRIPTS -->
-  <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Initializations -->
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
-
-  </script>
-
   <!-- Charts -->
   <script>
-    function download_bar () {
+    function download_bar() {
       const imageLink = document.createElement('a');
       const canvas = document.getElementById('myChart');
       imageLink.download = 'barchart.png';
-      imageLink.href= canvas.toDataURL('image/png', 1);
+      imageLink.href = canvas.toDataURL('image/png', 1);
       imageLink.click();
     }
-    function download_pie () {
+    function download_pie() {
       const imageLink = document.createElement('a');
       const canvas = document.getElementById('piechart');
       imageLink.download = 'piechart.png';
-      imageLink.href= canvas.toDataURL('image/png', 1);
+      imageLink.href = canvas.toDataURL('image/png', 1);
       imageLink.click();
     }
     //pie
+    /*
     var ctxP = document.getElementById("pieChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
       type: 'pie',
@@ -366,9 +338,7 @@
         responsive: true,
         legend: false
       }
-    });
-
+    });*/
   </script>
-</body>
 
-</html>
+</body>
