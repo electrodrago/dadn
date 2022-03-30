@@ -395,7 +395,7 @@ class chooseCapturePage(tk.Frame):
         self.text = tk.StringVar()
         
         def image_change():
-            image_cv2 = cv2.imread("data/word2.png")#"capture/capture.png")
+            image_cv2 = cv2.imread("capture/capture.png")
             gray = cv2.cvtColor(image_cv2, cv2.COLOR_BGR2GRAY)
             self.blurry = cv2.Laplacian(gray, cv2.CV_64F).var()
             if self.blurry >= 300:
@@ -404,7 +404,7 @@ class chooseCapturePage(tk.Frame):
                 text = "{} - Blur - Recapture".format(int(self.blurry))
             
             self.text.set(text)
-            image = Image.open("data/word2.png")
+            image = Image.open("capture/capture.png")
             image = image.resize((268, 201))
             test = ImageTk.PhotoImage(image)
             label.image = test
@@ -418,7 +418,7 @@ class chooseCapturePage(tk.Frame):
             global done
             if blurry >= threshold:
                 controller.show_frame('chooseDisplayPointPage') # Next frame
-                ls = ['data/word.png', 'data/word1.png', 'data/word2.png']
+                ls = ['cropped/0.jpg', 'data/word1.png', 'data/word2.png']
                 answer_marking = infer(model, ls)
                 done = True
                 print(answer_marking)

@@ -74,6 +74,9 @@ answer_ref = db.collection(
                     'CLASS').document(
                         class_to_access_firebase)
 
+
+
+
 answer = answer_ref.get().to_dict()['AnswerFile']
 print(answer)
 
@@ -113,33 +116,3 @@ answer_ref.collection('STUDENT').document(student_id).set({'S_Point': point})
 # Create new document of the ID from recognition, upload with 10 answers of the student getting mark to the
 # firebase server.
 # TODO: Code with tktiner client - # TODO: Check coding a retrieve format, python query from firebase and export excel.
-
-
-
-"""----------------------------------------------------------------------------------------------------"""
-# # # Get the ID of teacher
-# # doc_ref = db.collection('teacher')
-# # docs = doc_ref.stream()
-# #
-# # for doc in docs:
-# #     print("{} => {}".format(doc.id, doc.to_dict()))
-
-# id_ref = db.collection('teacher')
-# ids = id_ref.stream()
-
-# lst_id = []
-# for id in ids:
-#     lst_id.append(str(id.id))
-#     # print("{} => {}".format(doc.id, doc.to_dict()))
-# print(lst_id)
-
-# doc1st_ref = db.collection('teacher').document(lst_id[0])
-# # # Set value
-# # doc1st_ref.set({
-# #     'name': 'Viet'
-# # })
-# course = doc1st_ref.collection('course')
-# courses = course.stream()
-
-# for c in courses:
-#     print("{} => {}".format(c.id, c.to_dict()))
