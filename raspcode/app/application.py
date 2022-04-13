@@ -11,9 +11,7 @@ import urllib.request
 import numpy as np
 import imutils
 
-url = ""
-
-url = "http://192.168.9.192:8080/shot.jpg"
+url = "http://10.128.133.159:4747/video"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
         return list(f.read())
@@ -420,13 +418,13 @@ class chooseCameraPage(tk.Frame):
             # img = cv2.resize(img, (268, 201))
             return img
 
-        #cap = cv2.VideoCapture(url)
+        cap = cv2.VideoCapture(url)
 
         def video_stream():
-            # _, frame = cap.read()
-            # cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            _, frame = cap.read()
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
             # cv2image = cv2.rotate(cv2image, cv2.ROTATE_90_CLOCKWISE)
-            cv2image = get_image(url)
+            # cv2image = get_image(url)
             cv2image = cv2.resize(cv2image, (268, 201)) # (200, 150))
             img = Image.fromarray(cv2image)
             imgtk = ImageTk.PhotoImage(image=img)
@@ -438,7 +436,7 @@ class chooseCameraPage(tk.Frame):
 
         def assign_and_next_frame():
             global path_to_img
-            img = get_image(url)
+            img = cap.read()[1]
             cv2.imwrite('capture/capture.png', img)
             path_to_img = "capture/capture.png"
             

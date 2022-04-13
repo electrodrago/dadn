@@ -2,26 +2,36 @@ import urllib.request
 import cv2
 import numpy as np
 import imutils
+import tkinter as tk
+url = "http://10.128.133.159:4747/video"
 
-url = "http://10.127.32.234:8080/shot.jpg"
+# Import required Libraries
+from tkinter import *
+from PIL import Image, ImageTk
+import cv2
 
-while True:
-    imgPath = urllib.request.urlopen(url)
-    imgNp = np.array(bytearray(imgPath.read()), dtype=np.uint8)
-    img = cv2.imdecode(imgNp, -1)
-    #img = imutils.resize(img, 400, 200)
-    img = cv2.resize(img, (268, 201))
-    cv2.imshow("a", img)
-    if ord('q') == cv2.waitKey(1):
-        exit(0)
+# Create an instance of TKinter Window or frame
+win = Tk()
 
-# import cv2
+# Set the size of the window
+win.geometry("700x350")
 
-# cap = cv2.VideoCapture('http://192.168.0.3:8080/video')
+# Create a Label to capture the Video frames
+label =Label(win)
+label.grid(row=0, column=0)
+cap= cv2.VideoCapture(url)
 
-# while(True):
-#     ret, frame = cap.read()
-#     cv2.imshow('frame',frame)
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         cv2.destroyAllWindows()
-#         break
+# Define function to show frame
+def show_frames():
+   # Get the latest frame and convert into Image
+   cv2image= cv2.cvtColor(cap.read()[1],cv2.COLOR_BGR2RGB)
+   img = Image.fromarray(cv2image)
+   # Convert image to PhotoImage
+   imgtk = ImageTk.PhotoImage(image = img)
+   label.imgtk = imgtk
+   label.configure(image=imgtk)
+   # Repeat after an interval to capture continiously
+   label.after(1, show_frames)
+
+show_frames()
+win.mainloop()
