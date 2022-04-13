@@ -178,4 +178,38 @@ body{
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+/* Hover box */
+.index_nav_options_about {
+    position: relative;
+    cursor: default;
+}
+
+.index_nav_options_about:hover .index_nav_box-about {
+    display: block;
+}
+
+.index_nav_box-about {
+    background-color: whitesmoke;
+    position: absolute;
+    color: black;
+    left: -3rem;
+    top: 120%;
+    padding: 16px;
+    margin-right: 50px;
+    border-radius: 8px;
+    font-size: 18px;
+    display: none;
+}
+
+.index_nav_box-about::before {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    content: "";
+    display: block;
+    left: 0;
+    top: -15px;
+    /* background-color: red; */
+}
   
