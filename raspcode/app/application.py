@@ -13,7 +13,7 @@ import imutils
 
 url = ""
 
-url = "http://192.168.1.5:8080/video"
+url = "http://192.168.9.192:8080/shot.jpg"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
         return list(f.read())
@@ -411,24 +411,34 @@ class chooseCameraPage(tk.Frame):
         label = tk.Label(self)#, width=145, height=200)
         label.pack(pady=2)
         global url
-        cap = cv2.VideoCapture(url)
+
+        def get_image(url):
+            imgPath = urllib.request.urlopen(url)
+            imgNp = np.array(bytearray(imgPath.read()), dtype=np.uint8)
+            img = cv2.imdecode(imgNp, -1)
+            #img = imutils.resize(img, 400, 200)
+            # img = cv2.resize(img, (268, 201))
+            return img
+
+        #cap = cv2.VideoCapture(url)
 
         def video_stream():
-            _, frame = cap.read()
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            # _, frame = cap.read()
+            # cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
             # cv2image = cv2.rotate(cv2image, cv2.ROTATE_90_CLOCKWISE)
+            cv2image = get_image(url)
             cv2image = cv2.resize(cv2image, (268, 201)) # (200, 150))
             img = Image.fromarray(cv2image)
             imgtk = ImageTk.PhotoImage(image=img)
             label.imgtk = imgtk
             label.configure(image=imgtk)
-            label.after(1000, video_stream)
+            label.after(10, video_stream)
         
         video_stream()
 
         def assign_and_next_frame():
             global path_to_img
-            _, img = cap.read()
+            img = get_image(url)
             cv2.imwrite('capture/capture.png', img)
             path_to_img = "capture/capture.png"
             
