@@ -7,6 +7,11 @@ from threading import Thread
 from tkinter import LEFT, RIGHT, TOP, ttk
 from need.main import Model, infer
 from typing import List
+import urllib.request
+import numpy as np
+import imutils
+
+url = ""
 
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
@@ -24,7 +29,7 @@ course_to_access_firebase = ""
 class_to_access_firebase = ""
 path_to_img = ""
 done = False
-answer = ["word", "Vet", "Check"]
+answer = ["check", "check", "Check"]
 answer_marking = []
 
 # Get id on firestore
