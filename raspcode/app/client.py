@@ -3,7 +3,7 @@ from typing import List
 import os
 
 def char_list_from_file() -> List[str]:
-    with open('model/charList.txt') as f:
+    with open('./model/charList.txt') as f:
         return list(f.read())
 
 model = Model(char_list_from_file())
