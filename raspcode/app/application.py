@@ -8,6 +8,7 @@ from tkinter import LEFT, RIGHT, TOP, ttk
 from need.main import Model, infer
 from typing import List
 
+url = "http://192.168.1.5:8080/video"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
         return list(f.read())
@@ -404,7 +405,8 @@ class chooseCameraPage(tk.Frame):
 
         label = tk.Label(self)#, width=145, height=200)
         label.pack(pady=2)
-        cap = cv2.VideoCapture(0)
+        global url
+        cap = cv2.VideoCapture(url)
 
         def video_stream():
             _, frame = cap.read()
