@@ -189,6 +189,15 @@ body{
     display: block;
 }
 
+@keyframes fadeIn {
+	from {
+		opacity: 0
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 .index_nav_box-about {
     background-color: whitesmoke;
     position: absolute;
@@ -200,6 +209,7 @@ body{
     border-radius: 8px;
     font-size: 18px;
     display: none;
+    animation: fadeIn ease-in .3s;
 }
 
 .index_nav_box-about::before {
@@ -211,5 +221,8 @@ body{
     left: 0;
     top: -15px;
     /* background-color: red; */
+    
 }
+
+
   
