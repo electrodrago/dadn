@@ -14,6 +14,7 @@ This solution is just suitable with multiple choice question test which requires
 
 ## Devices
 - Raspberry pi 4
+- Waveshare 3.5 Inch Raspberry Pi High-Speed SPI Resistive Touch Display
 - Android phone
 ## Getting Started <a name = "getting_started"></a>
 
