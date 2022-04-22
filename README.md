@@ -25,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 2/ Download the folder rasp code in this respositories.
 
-3/ Raspberry pi have python version 3.9 and run on 64-bit (aarch64) OS 
+3/ Raspberry pi have python version 3.9 and run on 64-bit (aarch64) OS (If you use other type the system might not working correctly)
 
 ### Installing
 1/ Update your rapberry pi
