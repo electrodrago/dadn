@@ -27,6 +27,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 3/ Raspberry pi have python version 3.9 and run on 64-bit (aarch64) OS (If you use other type the system might not work correctly)
 
+4/ Register the teacher data 
+
 ### Installing
 1/ Update your rapberry pi
   ```
@@ -46,7 +48,7 @@ These instructions will get you a copy of the project up and running on your loc
   sudo apt install python3-pyqt5 -y
   sudo apt install -y  libhdf5-dev libhdf5-serial-dev -y
   ```
-4/ Install required python library or you can run install2.sh in install_lib folder
+3/ Install required python library or you can run install2.sh in install_lib folder
   ```
   wget https://drive.google.com/file/d/1tuNTevmFIEEC9eADdFZEQzebi_ewiPoN/view?usp=sharing
   pip3 install numpy==1.19.2
@@ -55,8 +57,9 @@ These instructions will get you a copy of the project up and running on your loc
   pip3 install keras==2.6.0
   pip3 install firebase-admin
   ```
-3/ Open application.py file and change the url to the url on your droidcam app.
-4/ Run application.py and enjoy
+4/ Open application.py file and change the url to the url on your droidcam app.
+
+5/ Run application.py and enjoy
 
 ## Usage <a name = "usage"></a>
 
