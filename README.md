@@ -27,9 +27,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 1/ Update your rapberry pi
-  ...
+  ```
   sudo apt-get update && sudo apt-get upgrade
-  ...
+  ```
 3/ open application.py file and change the url to the url on your droidcam app.
 
 ## Usage <a name = "usage"></a>
