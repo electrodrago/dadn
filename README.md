@@ -53,6 +53,7 @@ These instructions will get you a copy of the project up and running on your loc
   pip3 install tensorflow-2.6.0-cp39-cp39-linux_aarch64.whl
   pip3 install cvlib
   pip3 install keras==2.6.0
+  pip3 install firebase-admin
   ```
 3/ Open application.py file and change the url to the url on your droidcam app.
 4/ Run application.py and enjoy
