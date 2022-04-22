@@ -19,31 +19,18 @@ This solution is just suitable with multiple choice question test which requires
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-First
-
 ### Prerequisites
 
-```
-Give examples
-```
+1/ Install droidcam app on your android device with "keyword droidcam" 
+                or click this link https://play.google.com/store/apps/details?id=com.dev47apps.droidcam&hl=vi&gl=US .
+2/ Download the folder rasp code in this respositories.
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
+1/ Update your rapberry pi
+  ...
+  sudo apt-get update && sudo apt-get upgrade
+  ...
+3/ open application.py file and change the url to the url on your droidcam app.
 
 ## Usage <a name = "usage"></a>
 
