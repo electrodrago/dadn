@@ -21,9 +21,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-1/ Install droidcam app on your android device with "keyword droidcam" 
-                or click this link https://play.google.com/store/apps/details?id=com.dev47apps.droidcam&hl=vi&gl=US .
+1/ Install droidcam app on your android device with "keyword droidcam" or click this link https://play.google.com/store/apps/details?id=com.dev47apps.droidcam&hl=vi&gl=US .
+
 2/ Download the folder rasp code in this respositories.
+
 3/ Raspberry pi have python version 3.9 and run on 64-bit (aarch64) OS 
 
 ### Installing
