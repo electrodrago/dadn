@@ -48,7 +48,7 @@ These instructions will get you a copy of the project up and running on your loc
   ```
 4/ Install required python library or you can run install2.sh in install_lib folder
   ```
-  pip3 install opencv-python
+  wget https://drive.google.com/file/d/1tuNTevmFIEEC9eADdFZEQzebi_ewiPoN/view?usp=sharing
   pip3 install numpy==1.19.2
   pip3 install tensorflow-2.6.0-cp39-cp39-linux_aarch64.whl
   pip3 install cvlib
