@@ -10,6 +10,5 @@ model = Model(char_list_from_file())
 ls = []
 for i in os.listdir('cropped'):
     ls.append(os.path.join('cropped', i))
-print(ls)
 a = infer(model, ls)
 print(a)

@@ -56,7 +56,7 @@ def getCourses(teacher_id):
     return course_list
 
 
-course_list = getCourses(user_to_access_firebase);
+course_list = getCourses(user_to_access_firebase)
 print(course_list)
 
 

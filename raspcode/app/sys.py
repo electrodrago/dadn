@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-image = cv2.imread("C:\\Users\\quocv\\Downloads\\20220323_110222.jpg")
+image = cv2.imread("C:\\Users\\quocv\\Downloads\\image_2.jpg")
+image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
 image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
 image = cv2.resize(image, (1080, 720))
 
@@ -57,5 +58,5 @@ for i in unique:
     out = cv2.erode(out, kernel, iterations = 1)
     cv2.imwrite('cropped\\' + str(filename[j]) + '.jpg', out)
     j += 1
-    if j == 12:
+    if j == 11:
         break

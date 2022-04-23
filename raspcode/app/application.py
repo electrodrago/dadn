@@ -11,6 +11,123 @@ import urllib.request
 import numpy as np
 import imutils
 
+# Database setup
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from functools import reduce
+
+cred = credentials.Certificate('firebase-sdk.json')
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
+"""----------------------------------------------------------------------------------------------------"""
+# Select teacher, to retrieve answer and store the marking result on database
+# Display format: Teacher Name - Teacher ID
+# How to select, all teacher ID is store in dictionary: TeacherID - ID on Firestore
+# TODO: Code with tktiner client
+
+select_teacher = db.collection('Sample_Teacher')
+teachers = select_teacher.stream()
+
+# id_list store id on firebase
+# dict_list store dictionary of field of documents
+
+teacher_id = []
+teacher_infor = []
+for teacher in teachers:
+    teacher_id.append(teacher.id)
+    teacher_infor.append(teacher.to_dict())
+
+# print("teacher_id: ", teacher_id )
+# print("teacher_infor: ", teacher_infor)
+
+concat = []
+for i in range(len(teacher_id)):
+    concat.append(teacher_id[i] + ' - ' + teacher_infor[i]['T_Name'])
+print("teacher_id and teacher_name :", concat)
+"""----------------------------------------------------------------------------------------------------"""
+
+# # Global variable
+user_to_access_firebase = "1952493"
+
+
+def getCourses(teacher_id):
+    select_course = db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE')
+    courses = select_course.stream()
+
+    course_list = reduce(lambda acc, ele: acc + [ele.id], courses, [])
+    # print(course_list)
+    return course_list
+
+
+course_list = getCourses(user_to_access_firebase)
+
+
+# # Global variable
+course_to_access_firebase = course_list[0]
+
+def getClasses(teacher_id, Course_name):
+    select_class = db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE').document(
+                    Course_name).collection(
+                        'CLASS')
+    classes = select_class.stream()
+    class_list = reduce(lambda acc, ele: acc + [ele.id], classes, [])
+    return class_list
+
+class_list = getClasses(user_to_access_firebase, course_to_access_firebase);
+
+# # Global variable    
+class_to_access_firebase = class_list[0]
+
+def getSemester(teacher_id, coure_name, class_id):
+    select_semester = db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE').document(
+                    coure_name).collection(
+                        'CLASS').document(
+                            class_id).collection(
+                                "SEMESTER"
+                            )
+    semesters = select_semester.stream()
+    semester_list = reduce(lambda acc, ele: acc + [ele.id], semesters, [])
+    return semester_list
+semester_list = getSemester(user_to_access_firebase,course_to_access_firebase,class_to_access_firebase)
+
+
+# # Global variable    
+semester_to_access_firebase = semester_list[0]
+def getAnswerfile(teacher_id, coure_name, class_id,semester):
+    return  db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE').document(
+                    coure_name).collection(
+                        'CLASS').document(
+                            class_id).collection(
+                                "SEMESTER"
+                                ).document(
+                                    semester
+                                )
+
+
+
+answer = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).get().to_dict()['AnswerFile']
+
+# Upload to server
+# Global variable
+
+student_ref = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT')
+# is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
+
+
 url = "http://10.128.133.159:4747/video"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
@@ -18,18 +135,6 @@ def char_list_from_file() -> List[str]:
 
 model = Model(char_list_from_file())
 
-# Variable for test application
-concat = ['101 - Nguyen Quoc Viet', '102 - Bang Ngoc Bao Tam', "103 - Trinh Manh Hung"]
-course_list = ['Calculus 1', 'Calculus 2', "as"]
-class_list = ['CC01']
-# Global variable that change when click button of tkinter
-user_to_access_firebase = ""
-course_to_access_firebase = ""
-class_to_access_firebase = ""
-path_to_img = ""
-done = False
-answer = ["check", "check", "Check"]
-answer_marking = []
 
 # Get id on firestore
 def query_id(name_id):
@@ -418,7 +523,7 @@ class chooseCameraPage(tk.Frame):
             # img = cv2.resize(img, (268, 201))
             return img
 
-        cap = cv2.VideoCapture(url)
+        cap = cv2.VideoCapture(0)#url)
 
         def video_stream():
             _, frame = cap.read()
