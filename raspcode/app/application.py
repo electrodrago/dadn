@@ -47,7 +47,6 @@ for i in range(len(teacher_id)):
     concat.append(teacher_id[i] + ' - ' + teacher_infor[i]['T_Name'])
 print("teacher_id and teacher_name :", concat)
 """----------------------------------------------------------------------------------------------------"""
-
 # # Global variable
 user_to_access_firebase = "1952493"
 
@@ -151,7 +150,7 @@ class App(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (chooseTeacherPage, chooseCoursePage, chooseClassPage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
+        for F in (chooseTeacherPage, chooseCoursePage, chooseClassPage, chooseSemesterPage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
             page_name = F.__name__
             frame = F(parent=self.container, controller=self)
             self.frames[page_name] = frame
@@ -165,6 +164,13 @@ class App(tk.Tk):
     
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
+        if page_name == 'chooseCoursePage':
+            self.frames[page_name] = chooseCoursePage(parent=self.container, controller=self)
+        elif(page_name == 'chooseClassPage'):
+            self.frames[page_name] = chooseClassPage(parent=self.container, controller=self)
+        elif(page_name == 'chooseSemesterPage'):
+            self.frames[page_name] = chooseSemesterPage(parent=self.container, controller=self)
+        self.frames[page_name].grid(row=0, column=0, sticky="nsew")
         frame = self.frames[page_name]
         if page_name == "chooseDisplayPointPage":
             frame.t1.start()
@@ -192,6 +198,8 @@ class chooseTeacherPage(tk.Frame):
 
         def assign_and_next_frame(name_id):
             query_id(name_id)
+            global course_list
+            course_list = getCourses(user_to_access_firebase)
             controller.show_frame('chooseCoursePage')
 
         if len(concat) > 2:
@@ -287,6 +295,8 @@ class chooseCoursePage(tk.Frame):
         def assign_and_next_frame(course_id):
             global course_to_access_firebase
             course_to_access_firebase = course_id
+            global class_list
+            class_list = getClasses(user_to_access_firebase, course_to_access_firebase)
             controller.show_frame('chooseClassPage')
 
         if len(course_list) > 2:
@@ -383,8 +393,9 @@ class chooseClassPage(tk.Frame):
         def assign_and_next_frame(class_id):
             global class_to_access_firebase
             class_to_access_firebase = class_id
-            controller.show_frame('chooseMarkingPage')
-
+            global semester_list
+            semester_list = getSemester(user_to_access_firebase, course_to_access_firebase, class_id)
+            controller.show_frame('chooseSemesterPage')
         if len(class_list) > 2:
             canvas = tk.Canvas(self, bg='#00CC99')
             scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
@@ -455,6 +466,98 @@ class chooseClassPage(tk.Frame):
             )
             teacher1_button.pack(pady=10)
 
+class chooseSemesterPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, bg='#00CC99')
+        self.controller = controller
+
+        self.controller.title('Semester Selection')
+
+        heading_label = tk.Label(self,
+                                 text='Which Semester \n Your marks belong to?',
+                                 font=('orbitron', 20, 'bold'),
+                                 foreground='#ffffff',
+                                 background='#00CC99'
+                                 )
+        heading_label.pack(pady=10)
+
+        space_label = tk.Label(self, height=1, bg='#00CC99')
+        space_label.pack()
+
+        def assign_and_next_frame(semester_id):
+            global semester_to_access_firebase
+            semester_to_access_firebase = semester_id
+            controller.show_frame('chooseMarkingPage')
+
+        if len(semester_list) > 2:
+            canvas = tk.Canvas(self, bg='#00CC99')
+            scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
+
+            frame = tk.Frame(canvas, bg='#00CC99')
+            # Add buttons
+            lst_btn = []
+            for i in range(len(concat)):
+                text_display = "Semester " + semester_list[i]
+                teacher_button = tk.Button(frame,
+                                           text=text_display,
+                                           command=lambda j=semester_list[i]: assign_and_next_frame(j),
+                                           relief='raised',
+                                           borderwidth=1,
+                                           width=25,
+                                           height=1,
+                                           font=('orbitron', 15, 'bold'),
+                                           fg="#6666CC"
+                                           )
+                lst_btn.append(teacher_button)
+            for i in lst_btn:
+                i.pack(pady=20, padx=75)
+
+            # Create canvas for scrolling
+            canvas.create_window(0, 0, window=frame)
+            canvas.update_idletasks()
+
+            canvas.configure(scrollregion=canvas.bbox('all'),
+                             yscrollcommand=scroll_y.set)
+
+            canvas.pack(fill='both', expand=True, side='left')
+            scroll_y.pack(fill='y', side='right')
+        elif len(semester_list) == 2:
+            teacher1_button = tk.Button(self,
+                                        text="Semester " + semester_list[0],
+                                        command=lambda: assign_and_next_frame(semester_list[0]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+                                        )
+            teacher1_button.pack(pady=10)
+
+            teacher2_button = tk.Button(self,
+                                        text="Semester " + semester_list[1],
+                                        command=lambda: assign_and_next_frame(semester_list[1]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+
+                                        )
+            teacher2_button.pack(pady=10)
+        else:
+            teacher1_button = tk.Button(self,
+                                        text="Semester " + class_list[0],
+                                        command=lambda: assign_and_next_frame(class_list[0]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+                                        )
+            teacher1_button.pack(pady=10)
 
 class chooseMarkingPage(tk.Frame):
 
@@ -690,6 +793,8 @@ class chooseDisplayPointPage(tk.Frame):
             fg="#6666CC"
         )
         mark_another_button.pack(pady=10)
+
+
 
 if __name__ == "__main__":
     app = App()
