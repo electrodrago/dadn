@@ -5,45 +5,49 @@
     margin-block-end: 0;
     margin-inline-start: 0;
     margin-inline-end: 0;
-  }
-  html, body{
+}
+
+html, body{
     margin: 0;
     padding: 0;
-    /* width: 100%;
-    height: 100vh; */
+}
 
-  }
 .index_nav{
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     padding-top: 25px;
-    
+    padding-bottom: 10px;
+    position: fixed;
+	background: rgba(0, 0, 0, 0.4);
 }
 
 a{
 text-decoration: none;
 cursor: pointer;
 }
+
 .index_nav_options{
     display: flex;
-    column-gap: 20px
-    ;
+    column-gap: 20px;
 }
-.index_nav_options_home, .index_nav_options_course, .index_nav_options_about{
+
+.index_nav_options_home, 
+.index_nav_options_course, 
+.index_nav_options_about{
     color: whitesmoke ;
     font-size: 22px;
-
     padding: 11px 15px;
     border-bottom: 1px solid transparent;
     transition: border-color 300ms;
     font-weight: 500;
 }
 
-.index_nav_options_home:hover, .index_nav_options_course:hover, .index_nav_options_about:hover{
+.index_nav_options_home:hover, 
+.index_nav_options_course:hover, 
+.index_nav_options_about:hover{
     border-color: white;
-
 }
 
 .index_nav_login{
@@ -58,49 +62,60 @@ cursor: pointer;
 
 .index_nav_login:hover{
     background-color: #0d0cb5;
-}
+} 
+
 body{
-    width: 100%;
     height: 100vh;
-    background-image: url("./Images/index.jpg");
-    background-position:center ;
-    background-size: cover;
-    z-index: -1;
+    overflow: hidden;
 }
+
 .Visual_layer{
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(52, 58, 64,0.6);
-    
     height: 100%;
+    width: 100%;
+
+	overflow-y: scroll;
+	scroll-behavior: smooth;
 }
+
 .index_body{
     display: flex;
-    
-    max-width: 960px;
-    margin: auto;
-
+    /* max-width: 960px; */
+    margin: 0;
 }
 
 .index_body_description{
-    margin-top: 20px;
-    max-width: 50%;
-    flex: 0 0 50%;
+    /* flex: 0 0 50%; */
     color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    max-width: 50%;
+    max-height: 50%;
 }
+
+.overlay {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(52, 58, 64, 0.6);
+}
+
 .Intro_Header{
-    font-size:25px;
+    font-size: 1.6rem;
     font-weight: 800;
+    margin-left: 25px;
 }
+
 .Intro_details{
     font-weight: lighter;
     color: rgba(255, 255, 255, 0.795);
-    font-size: 1.1rem;
-
+    font-size: 1.2rem;
+    text-align: justify;
 }
+
 .index_body_form{
-    background-color: white;
+    background-color: whitesmoke;
     padding: 35px;
     display: flex;
     flex-direction: column;
@@ -108,13 +123,14 @@ body{
     padding: 40px;
     background: #fff;
     border-radius: 7px;
-
 }
+
 .index_body_form_header{
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.2;
 }
+
 .SignUp_Button{
     text-transform: uppercase;
     font-size: 12px;
@@ -134,12 +150,11 @@ body{
 .index_body_form_inputs{
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
-    
-    
+    row-gap: 20px;  
 }
 
-.email, .password{
+.email, 
+.password{
     height: 48px;
     display: block;
     width: 100%;
@@ -153,6 +168,7 @@ body{
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
+
 .Contain_form{
     -webkit-box-flex: 0;
     -ms-flex: 0 0 41.66667%;
@@ -168,6 +184,7 @@ body{
 .index_nav_logo{
     color: whitesmoke;
 }
+
 .Logo_image{
     width: 80px;
     height: 80px;   
@@ -182,47 +199,33 @@ body{
 /* Hover box */
 .index_nav_options_about {
     position: relative;
-    cursor: default;
+    cursor: pointer;
 }
 
-.index_nav_options_about:hover .index_nav_box-about {
-    display: block;
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* text-align: center; */
+	width: 100%;
+	height: 100vh;
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0
-	}
-	to {
-		opacity: 1;
-	}
+section#home {
+    background-image: url("./Images/index.jpg");
+    background-position:center ;
+    background-size: cover;
 }
 
-.index_nav_box-about {
-    background-color: whitesmoke;
-    position: absolute;
-    color: black;
-    left: -3rem;
-    top: 120%;
-    padding: 16px;
-    margin-right: 50px;
-    border-radius: 8px;
-    font-size: 18px;
-    display: none;
-    animation: fadeIn ease-in .3s;
+section#about {
+    background-image: url("./Images/jimmy-jin-rtbC1SOwMZ4-unsplash.jpg");
+    background-position:center ;
+    background-size: cover;
 }
 
-.index_nav_box-about::before {
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    content: "";
-    display: block;
-    left: 0;
-    top: -15px;
-    /* background-color: red; */
-    
+section#about div {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #ddd;
 }
-
-
-  

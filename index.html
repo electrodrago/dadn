@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 
 <body>
@@ -16,39 +15,30 @@
                 <div class="Logo_image"></div>
             </a>
             <div class="index_nav_options">
-                <a class="index_nav_options_home" href="./index.html">
+                <a class="index_nav_options_home" href="#home">
                     <p>HOME</p>
                 </a>
                 <a class="index_nav_options_course" href="./course/course.html">
                     <p>COURSE</p>
                 </a>
-                <a class="index_nav_options_about">
+                <a class="index_nav_options_about" href="#about">
                     <p>ABOUT</p>
-                    <div class="index_nav_box-about">
-                        <h1>Contributors</h1>
-                        <ol>
-                            <li>Tran Duc Nam</li>
-                            <li>Nguyen Quoc Viet</li>
-                            <li>Trinh Manh Hung</li>
-                            <li>Tran Vinh Tien</li>
-                            <li>Nguyen Dong Quan</li>
-                        </ol>
-                    </div>
                 </a>
-
             </div>
-            <a class="index_nav_login"  id="Log" >
+            <a class="index_nav_login"  id="Log" >Login
             </a>
-
         </div>
-        <div class="index_body">
-            <div class="index_body_description">
-                <p class="Intro_Header">Welcome to our team</p>
-                <p class=" Intro_details">Manual grading is actually popular at nowadays, but it's sure that is not the
-                    best way due to the time consumption it cost every time. Thanks to the development of technology,
-                    especially Artificial Intelligence, has motivated our team to implement a grading system that can
-                    help the teacher save a lot of their time on grading their student's answers sheets. Let's log in
-                    and enjoy your free time with us! </p>
+
+        <section id="home" class="index_body">
+            <div class="overlay">
+                <div class="index_body_description">
+                    <p class="Intro_Header">Welcome to our team</p>
+                    <p class=" Intro_details">Manual grading is actually popular at nowadays, but it's sure that is not the
+                        best way due to the time consumption it cost every time. Thanks to the development of technology,
+                        especially Artificial Intelligence, has motivated our team to implement a grading system that can
+                        help the teacher save a lot of their time on grading their student's answers sheets. Let's log in
+                        and enjoy your free time with us! </p>
+                </div>
             </div>
             <!-- <div class="Contain_form">
                 <form class = "index_body_form">
@@ -68,10 +58,20 @@
                    
                 </form>
             </div> -->
+        </section>
 
-
-        </div>
-
+        <section id="about">
+            <div>
+                <h1>Contributors</h1>
+                <ol>
+                    <li>Tran Duc Nam</li>
+                    <li>Nguyen Quoc Viet</li>
+                    <li>Trinh Manh Hung</li>
+                    <li>Tran Vinh Tien</li>
+                    <li>Nguyen Dong Quan</li>
+                </ol>
+            </div>            
+        </section>
     </div>
     <script src="index.js" type="module"></script>
 </body>
