@@ -10,6 +10,7 @@ from typing import List
 import urllib.request
 import numpy as np
 import imutils
+import os
 
 # Database setup
 import firebase_admin
@@ -487,6 +488,9 @@ class chooseSemesterPage(tk.Frame):
         def assign_and_next_frame(semester_id):
             global semester_to_access_firebase
             semester_to_access_firebase = semester_id
+            global answer
+            print(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase, semester_to_access_firebase)
+            answer = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).get().to_dict()['AnswerFile']
             controller.show_frame('chooseMarkingPage')
 
         if len(semester_list) > 2:
@@ -548,8 +552,8 @@ class chooseSemesterPage(tk.Frame):
             teacher2_button.pack(pady=10)
         else:
             teacher1_button = tk.Button(self,
-                                        text="Semester " + class_list[0],
-                                        command=lambda: assign_and_next_frame(class_list[0]),
+                                        text="Semester " + semester_list[0],
+                                        command=lambda: assign_and_next_frame(semester_list[0]),
                                         relief='raised',
                                         borderwidth=1,
                                         width=25,
@@ -647,7 +651,7 @@ class chooseCameraPage(tk.Frame):
             img = cap.read()[1]
             cv2.imwrite('capture/capture.png', img)
             path_to_img = "capture/capture.png"
-            
+            os.system('python sys.py')
             controller.show_frame('chooseCapturePage')
                 
         marking_button = tk.Button(self,
@@ -699,7 +703,9 @@ class chooseCapturePage(tk.Frame):
             global done
             if blurry >= threshold:
                 controller.show_frame('chooseDisplayPointPage') # Next frame
-                ls = ['cropped/0.jpg', 'data/word1.png', 'data/word2.png']
+                ls = []
+                for i in range(10):
+                    ls.append(os.path.join("cropped", str(i) + '.jpg'))
                 answer_marking = infer(model, ls)
                 done = True
                 print(answer_marking)

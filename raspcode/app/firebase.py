@@ -123,18 +123,18 @@ print(answer)
 
 # Upload to server
 # Global variable
-student_id = 'AAA'
-point = 8
+# student_id = 'AAA'
+# point = 8
 
-# def check(collection_ref):
-#     docs = collection_ref.stream();
-#     if(len(reduce(lambda acc, ele: acc + [ele.id], docs, [])) == 0):
-#         return False
-#     return True
+# # def check(collection_ref):
+# #     docs = collection_ref.stream();
+# #     if(len(reduce(lambda acc, ele: acc + [ele.id], docs, [])) == 0):
+# #         return False
+# #     return True
 
-student_ref = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT')
-# is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
-student_ref.document(student_id).set({'S_Point': point})
+# student_ref = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT')
+# # is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
+# student_ref.document(student_id).set({'S_Point': point})
 # print(len(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT').stream()))
 # answer_ref.collection('STUDENT').document(student_id).set({'S_Point': point})
 # """----------------------------------------------------------------------------------------------------"""

@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 
-image = cv2.imread("C:\\Users\\quocv\\Downloads\\image_2.jpg")
-image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+image = cv2.imread("data/image_5.jpg")
+#image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+#image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)s
 image = cv2.resize(image, (1080, 720))
 
 
@@ -20,17 +20,17 @@ rects = [cv2.boundingRect(cnt) for cnt in contours]
 rects = sorted(rects,key=lambda  x:x[1],reverse=True)
 
 
-filename = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+filename = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 i = 0
 prev_boxes = []
 for c in contours:
     (x, y, w, h) = cv2.boundingRect(c)    
-    if w * h > 15000 and w * h < 30000:
+    if w * h > 12500 and w * h < 40000:
         out = gray[y+10:y+h-10,x+10:x+w-10]
         cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
         prev_boxes.append([y + 2, y + h - 2, x + 2, x + w - 2])
         i = i + 1
-        
+
 prev_boxes = sorted(prev_boxes)
 unique = []
 for i in prev_boxes:
@@ -58,5 +58,5 @@ for i in unique:
     out = cv2.erode(out, kernel, iterations = 1)
     cv2.imwrite('cropped\\' + str(filename[j]) + '.jpg', out)
     j += 1
-    if j == 11:
+    if j == 13:
         break
