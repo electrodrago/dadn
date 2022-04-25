@@ -4,7 +4,7 @@ from click import command
 from cv2 import cv2
 from PIL import Image, ImageTk
 from threading import Thread
-from tkinter import LEFT, RIGHT, TOP, ttk
+from tkinter import LEFT, RIGHT, TOP, Tk, ttk
 from need.main import Model, infer
 from typing import List
 import urllib.request
@@ -121,10 +121,47 @@ def getAnswerfile(teacher_id, coure_name, class_id,semester):
 
 answer = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).get().to_dict()['AnswerFile']
 
+
+
+def getStudents(teacher_id, coure_name, class_id, semester_id):
+    select_student = db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE').document(
+                    coure_name).collection(
+                        'CLASS').document(
+                            class_id).collection(
+                                "SEMESTER"
+                                ).document(
+                                    semester_id
+                                    ).collection(
+                                        "STUDENT"
+                                     )
+    students = select_student.stream()
+    student_ids = reduce(lambda acc, ele: acc + [ele.id], students, [])
+    return student_ids
+student_list = getStudents(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase, semester_to_access_firebase)
+def UpdateStudentMark(teacher_id, coure_name, class_id, semester_id, student_id, mark):
+    db.collection(
+        'Sample_Teacher').document(
+            teacher_id).collection(
+                'COURSE').document(
+                    coure_name).collection(
+                        'CLASS').document(
+                            class_id).collection(
+                                "SEMESTER"
+                                ).document(
+                                    semester_id
+                                    ).collection(
+                                        "STUDENT"
+                                     ).document(
+                                        student_id
+                                     ).update({'S_Point': int(mark)})
+    return None
 # Upload to server
 # Global variable
+Student_point = 0
 
-student_ref = getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT')
 # is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
 
 
@@ -151,7 +188,7 @@ class App(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (chooseTeacherPage, chooseCoursePage, chooseClassPage, chooseSemesterPage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage):
+        for F in (chooseTeacherPage, chooseCoursePage, chooseClassPage, chooseSemesterPage, chooseMarkingPage, chooseCameraPage, chooseCapturePage, chooseDisplayPointPage, chooseStudentIDPage):
             page_name = F.__name__
             frame = F(parent=self.container, controller=self)
             self.frames[page_name] = frame
@@ -171,6 +208,8 @@ class App(tk.Tk):
             self.frames[page_name] = chooseClassPage(parent=self.container, controller=self)
         elif(page_name == 'chooseSemesterPage'):
             self.frames[page_name] = chooseSemesterPage(parent=self.container, controller=self)
+        elif(page_name == 'chooseStudentIDPage'):
+            self.frames[page_name] = chooseStudentIDPage(parent=self.container, controller=self)
         self.frames[page_name].grid(row=0, column=0, sticky="nsew")
         frame = self.frames[page_name]
         if page_name == "chooseDisplayPointPage":
@@ -761,6 +800,8 @@ class chooseDisplayPointPage(tk.Frame):
                             self.points_num += 1
                     self.points.set('Result:\n' + str(self.points_num) + ' / ' + str(len(answer)))
                     done = False
+                    global Student_point 
+                    Student_point = self.points_num
                     print("end")
                     break
         
@@ -768,8 +809,10 @@ class chooseDisplayPointPage(tk.Frame):
         # self.t1.start()
 
         def assign_and_next_frame():
-            # self.t1.join()
-            controller.show_frame('chooseTeacherPage') # Next frame
+            global student_list
+            student_list = getStudents(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase, semester_to_access_firebase)
+            print("hello")
+            controller.show_frame('chooseStudentIDPage') # Next frame
         
         def camera_frame():
             # self.t1.join()
@@ -800,6 +843,97 @@ class chooseDisplayPointPage(tk.Frame):
         )
         mark_another_button.pack(pady=10)
 
+class chooseStudentIDPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, bg='#00CC99')
+        self.controller = controller
+
+        self.controller.title('StudentID Selection')
+
+        heading_label = tk.Label(self,
+                                 text='Which Student \n You want to update?',
+                                 font=('orbitron', 20, 'bold'),
+                                 foreground='#ffffff',
+                                 background='#00CC99'
+                                 )
+        heading_label.pack(pady=10)
+
+        space_label = tk.Label(self, height=1, bg='#00CC99')
+        space_label.pack()
+
+        def assign_and_next_frame(student_id):
+            UpdateStudentMark(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase, semester_to_access_firebase, student_id, Student_point)
+            controller.show_frame('chooseTeacherPage') 
+
+        if len(student_list) > 2:
+            canvas = tk.Canvas(self, bg='#00CC99')
+            scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.yview, bg='#00CC99', background='#00CC99')
+
+            frame = tk.Frame(canvas, bg='#00CC99')
+            # Add buttons
+            lst_btn = []
+            for i in range(len(student_list)):
+                text_display = "Student " + student_list[i]
+                teacher_button = tk.Button(frame,
+                                           text=text_display,
+                                           command=lambda j=student_list[i]: assign_and_next_frame(j),
+                                           relief='raised',
+                                           borderwidth=1,
+                                           width=25,
+                                           height=1,
+                                           font=('orbitron', 15, 'bold'),
+                                           fg="#6666CC"
+                                           )
+                lst_btn.append(teacher_button)
+            for i in lst_btn:
+                i.pack(pady=20, padx=75)
+
+            # Create canvas for scrolling
+            canvas.create_window(0, 0, window=frame)
+            canvas.update_idletasks()
+
+            canvas.configure(scrollregion=canvas.bbox('all'),
+                             yscrollcommand=scroll_y.set)
+
+            canvas.pack(fill='both', expand=True, side='left')
+            scroll_y.pack(fill='y', side='right')
+        elif len(student_list) == 2:
+            teacher1_button = tk.Button(self,
+                                        text="Student " + student_list[0],
+                                        command=lambda: assign_and_next_frame(student_list[0]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+                                        )
+            teacher1_button.pack(pady=10)
+
+            teacher2_button = tk.Button(self,
+                                        text="Student " + student_list[1],
+                                        command=lambda: assign_and_next_frame(student_list[1]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+
+                                        )
+            teacher2_button.pack(pady=10)
+        else:
+            teacher1_button = tk.Button(self,
+                                        text="Student " + student_list[0],
+                                        command=lambda: assign_and_next_frame(student_list[0]),
+                                        relief='raised',
+                                        borderwidth=1,
+                                        width=25,
+                                        height=1,
+                                        font=('orbitron', 15, 'bold'),
+                                        fg="#6666CC"
+                                        )
+            teacher1_button.pack(pady=10)
 
 
 if __name__ == "__main__":
