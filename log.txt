@@ -1,0 +1,491 @@
+commit 1ce67c2b79c49e9df3903134a9401be36b2b8ec7
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Mon Apr 25 11:33:55 2022 +0700
+
+    Processing image
+
+commit bf4c45129c2b78f11e3574f80e3f6808248b385e
+Merge: cdce7e4 5c11dfe
+Author: 079202003592 <quan.nguyendong031102@hcmut.edu.vn>
+Date:   Sun Apr 24 20:56:20 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit cdce7e4afb5d53da8d8329d1f2263a382c6b3824
+Author: 079202003592 <quan.nguyendong031102@hcmut.edu.vn>
+Date:   Sun Apr 24 20:55:58 2022 +0700
+
+    ajust ui ux
+
+commit 5c11dfebdc3b7e424d621458facb6aa1feba55e5
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Sat Apr 23 23:00:53 2022 +0700
+
+    adjust application.py
+
+commit aaea00fdc56395a59144e62ba9dbb1c4f9b21351
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Apr 23 17:15:20 2022 +0700
+
+    Code
+
+commit 00ad92db84fd4d583c458056b067e513fbef3984
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Apr 23 17:14:08 2022 +0700
+
+    Code
+
+commit d2c5f603fae0b00f3eb54ee51e6be42ef0294fd4
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Apr 23 17:13:06 2022 +0700
+
+    Code
+
+commit 95db6ba4193c9b048368c660cbac72030fb80132
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Apr 23 16:07:44 2022 +0700
+
+    Merge firebase
+
+commit 8a584e66643ec820deaea908234c37bbf719fbdc
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 20:10:19 2022 +0700
+
+    Update README.md
+
+commit a28836c7cb48971cc87fea80bbaf336def764328
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:31:30 2022 +0700
+
+    Update README.md
+
+commit 266a11941689088c35985c361248d3e633822305
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:30:18 2022 +0700
+
+    Update README.md
+
+commit a0762a7377dd614b3667971864e019900a489288
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:28:48 2022 +0700
+
+    Update README.md
+
+commit 2fcd3c44c67ded88a0fd1ae5f0b91d6cb4fd9ff3
+Author: Vinh Tien <vinhtien1612@gmail.com>
+Date:   Fri Apr 22 19:25:49 2022 +0700
+
+    add install library files
+
+commit ed49dfe19de8aff7046012e1937f60066f11090d
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:21:42 2022 +0700
+
+    Update README.md
+
+commit 69a85556a4ba34e11e78939c2de26be75c64612d
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:20:42 2022 +0700
+
+    Update README.md
+
+commit 3b410c3c9f2077613280256bccc1950c51ad53de
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:17:35 2022 +0700
+
+    Update README.md
+
+commit 8035e74dbcefd63f21824e0a11fb17bca9630878
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:06:24 2022 +0700
+
+    Update README.md
+
+commit 3280b46fc6577c1a718ba53f6b4e6a09ce025b0f
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:04:46 2022 +0700
+
+    Update README.md
+
+commit 901349ea5ee4a8bd94b3cba834df87ac64a47cce
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:04:19 2022 +0700
+
+    Update README.md
+
+commit e2a53e353540f7a9e2a22a0034de0ac1af1c4694
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 19:02:09 2022 +0700
+
+    Update README.md
+
+commit 1a536d3dc7874d868e698541ee0a2b0a1674b778
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:47:09 2022 +0700
+
+    Update README.md
+
+commit ad87c9edead5dcddea18f5af801298dce1d7f544
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:45:58 2022 +0700
+
+    Update README.md
+
+commit f30382d36d0b792d96b6dd632c8c9875bf6f48f5
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:35:40 2022 +0700
+
+    Update README.md
+
+commit a06014ada5f7f15d533c5606132bbbd71c57d743
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:34:49 2022 +0700
+
+    Update README.md
+
+commit 94982ce2b53d242c1b538c8f28c750de8cb05881
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:31:37 2022 +0700
+
+    Update README.md
+
+commit 959451cd97c0921c7311ce00c07bc416e7d47144
+Author: Tran Vinh Tien <80899053+Kaiseru1612@users.noreply.github.com>
+Date:   Fri Apr 22 18:30:40 2022 +0700
+
+    Update README.md
+
+commit 4661ea7bfd99494602cddca680a0002292dd9202
+Author: 079202003592 <quan.nguyendong031102@hcmut.edu.vn>
+Date:   Fri Apr 15 08:51:59 2022 +0700
+
+    about
+
+commit c6636dbfb0812e866cb542752f60c66ec77c722c
+Author: 079202003592 <quan.nguyendong031102@hcmut.edu.vn>
+Date:   Wed Apr 13 15:25:09 2022 +0700
+
+    add hover box-about
+
+commit 10b08b6eeb88b4b64972df3463c40e39759572f7
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Apr 13 11:32:19 2022 +0700
+
+    Change camera way
+
+commit 03e15656dd060f98157e81c77574d11660b6ced3
+Merge: 996f692 703e5ac
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Apr 13 10:56:27 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit 996f69260f14eb027b8285a25debfc35b1154e1c
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Apr 13 10:55:38 2022 +0700
+
+    Camera setup
+
+commit 703e5ac7490178ccd47df367d7bfba5514e1eb6e
+Merge: 8e60508 0a99aea
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Apr 13 10:20:16 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit 8e6050869b4ce5daf2bacee4d5cff04a88ebceb1
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Apr 13 10:20:01 2022 +0700
+
+    adjust course and index.html
+
+commit 272eacd74ac6c3f6909b97b6eb9ece5b0fa99ea1
+Merge: b8e7350 0a99aea
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Apr 13 10:12:49 2022 +0700
+
+    a
+
+commit b8e735036c1d0209c2bcfa184dfce5d030dd6a22
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Apr 13 10:10:08 2022 +0700
+
+    a
+
+commit 0a99aeaf996dbfd6c13170dc267dbf6ca14bd64f
+Author: Kaiseru1612 <vinhtien1612@gmail.com>
+Date:   Fri Apr 1 19:33:26 2022 +0700
+
+    Modify
+
+commit 87b575bd9367530eb7ffa09a9e3674703a425c3c
+Author: Kaiseru1612 <vinhtien1612@gmail.com>
+Date:   Fri Apr 1 19:29:30 2022 +0700
+
+    Modify
+
+commit 6956b671626431a7431053802780139d7838ab1a
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 30 17:28:48 2022 +0700
+
+    adjust firebase.py
+
+commit 234b893523cc9bef646e486d91e5ee238d995102
+Merge: 39ffbf4 8740164
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 30 16:53:21 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit 39ffbf4e1f5c67a8f9f11710d60d79e375a83b99
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 30 16:52:00 2022 +0700
+
+    adjust raspcode\app\firebase.py
+
+commit 874016496fedd6fb0bb1e287e9bf2eda56ef5d96
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Mar 30 16:35:52 2022 +0700
+
+    Modify application.py
+
+commit 961a0cc990e109fc04291051dbce3671f1148eed
+Merge: e44be53 ea70b2f
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Mar 30 15:05:01 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit e44be539e06a721de91f38c3b19fff74ac2a4365
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Mar 30 15:04:41 2022 +0700
+
+    Add cropped
+
+commit ea70b2f7ba80a373c3843212e0edc4893f754a75
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Sat Mar 26 22:29:07 2022 +0700
+
+    re-update
+
+commit fe68515acc7bb2da04411a19cfa9f9313d428493
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Sat Mar 26 16:23:20 2022 +0700
+
+    link files and adjust database link in input.js, dashboard.js, course.js
+
+commit af8499e2a4eafbd35acac318d7e69cb22f3f3ca7
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Thu Mar 24 23:28:19 2022 +0700
+
+    Delete Homepage folder and adjust code in index2.html
+
+commit 7561ae5ffd15e823841207b1c1e53817c9fe0cc2
+Author: manhhungking <trinhmanhhung03@gmail.com>
+Date:   Thu Mar 24 01:20:49 2022 +0700
+
+    Upload full code
+
+commit 16ec1c655f130b0fa2d0f7e681830af0f12c7945
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 18 23:14:57 2022 +0700
+
+    Write Firebase upload & chooseClassPage
+
+commit eb81ea69d6a0ce4d02f35865bbc90fac166c0f0d
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 18 20:51:10 2022 +0700
+
+    Change README.md
+
+commit de7d7fbe295036c230b320a930d98c76ff94bd59
+Merge: c63725b acb73dc
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 18 19:42:47 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit c63725bb1fa09ad0416d0cec296bba0e4771ec68
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 18 19:42:32 2022 +0700
+
+    Recognize with model
+
+commit acb73dc37d90aff978356d98d9d708a09237aaea
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Fri Mar 18 10:07:36 2022 +0700
+
+    course.js - get the diractory
+
+commit 464f54b867c4a762e033989f8b30754e2c8af9d4
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Thu Mar 17 17:02:51 2022 +0700
+
+    setDoc in input.js
+
+commit 29ed4e878da853d1527bf3501122a1446b1e45b8
+Merge: bfb01c5 88e2416
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Thu Mar 17 16:56:01 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit bfb01c5497b22eb2575ec4089ddcbe4498bdf396
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Thu Mar 17 16:55:12 2022 +0700
+
+    login.js, input.js
+
+commit 88e241639925f2b2834411f4a9918d75013c196f
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Mar 16 21:02:46 2022 +0700
+
+    Change camera display
+
+commit 4a1891f6374b48372a182fd41c2e96bddd2feb79
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sun Mar 13 20:08:57 2022 +0700
+
+    Threshold - blur detection
+
+commit 7ec1b8ac19b7f7a0ca94d9141ffaacb7dea81158
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Mar 12 01:09:30 2022 +0700
+
+    Camera view
+
+commit 8b51f0deddac6c0ded5722d6114addb56b3e7d3f
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 11 17:26:57 2022 +0700
+
+    Code
+
+commit f0abf8fb99f665644c8c7c502406d2a0a45ba63c
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 11 15:34:06 2022 +0700
+
+    Tkinter design
+
+commit c1b782118ef66eb0fbf1b09e6597238a2f8658ea
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Fri Mar 11 00:05:49 2022 +0700
+
+    Raspberry Code
+
+commit 74666984c1b7ba9708732b63c1d426c8ad795140
+Author: Trịnh Mạnh Hùng <67094879+manhhungking@users.noreply.github.com>
+Date:   Wed Mar 9 17:10:42 2022 +0700
+
+    Add files via upload
+    
+    Change the dashboard
+
+commit 4403b4a6a045ace6183f8ec8fc4a1b1c9f49e497
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Wed Mar 9 16:05:38 2022 +0700
+
+    Icon cal 1
+
+commit 474bfe390f66ed083b9d5a01c7c455e634aea048
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 9 13:18:15 2022 +0700
+
+    add logo into dashboard.html
+
+commit b8f0acb356eae1658dab5466e63fd103f760447c
+Merge: 3ceb2bf d58817a
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 9 12:01:37 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit 3ceb2bfa6037e220fe8e1f51965697a093f57df7
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Wed Mar 9 11:57:03 2022 +0700
+
+    add logo into index and course.html
+
+commit d58817a12484712d80d7367769e9e034f490fcfa
+Author: Trịnh Mạnh Hùng <67094879+manhhungking@users.noreply.github.com>
+Date:   Tue Mar 8 22:27:22 2022 +0700
+
+    Add files via upload
+
+commit fe26df0f8719f7476ef1e0e20d622200bb9c0e47
+Merge: 19be1a7 475599d
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Tue Mar 8 00:23:48 2022 +0700
+
+    Merge branch 'main' of https://github.com/electrodrago/dadn
+
+commit 19be1a794a41712d4f01997cfcb28f461a10020b
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Tue Mar 8 00:21:41 2022 +0700
+
+    Add course.html, input_form.html, delete footer on login.html, delete sign up form in index.html
+
+commit c59468a5d9b0224b0515a5f2ace24346361b4843
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Tue Mar 8 00:17:16 2022 +0700
+
+    Add course.html, input_form.html, delete footer on login.html, delete sign up form in index.html
+
+commit 475599d438c2e55dfc97a87c6829e20f0c3ebc55
+Author: Trịnh Mạnh Hùng <67094879+manhhungking@users.noreply.github.com>
+Date:   Mon Mar 7 20:07:54 2022 +0700
+
+    Add files via upload
+
+commit 2b747c17774766bca3b9f1b64615fc05abc3e33d
+Author: Trịnh Mạnh Hùng <67094879+manhhungking@users.noreply.github.com>
+Date:   Mon Mar 7 20:07:13 2022 +0700
+
+    Add files via upload
+
+commit 2b3133887cebc3fda1c5e250dc775fc7369ba577
+Author: Nguyễn Quốc Việt <69759233+electrodrago@users.noreply.github.com>
+Date:   Mon Mar 7 09:09:35 2022 +0700
+
+    Database Sketch
+
+commit 1b68b47a078a9571c1d98ca7e61c0802b55ba439
+Author: Nguyễn Quốc Việt <69759233+electrodrago@users.noreply.github.com>
+Date:   Mon Mar 7 09:00:31 2022 +0700
+
+    database_design.drawio.png
+
+commit 2062dcdadae2918ce2f123b2b24b84a072e8e16a
+Author: Nguyễn Quốc Việt <69759233+electrodrago@users.noreply.github.com>
+Date:   Sat Mar 5 15:39:52 2022 +0700
+
+    Create README.md
+
+commit a017fb6f2b42b16d553d577dc28b6cc35bd939a2
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Mar 5 15:39:28 2022 +0700
+
+    Authentication
+
+commit fad9b8c557a8e7bee343d590ed78d543a6be78ba
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Mar 5 09:57:38 2022 +0700
+
+    css
+
+commit 56a833b79e9b62184a49b4dc616a17c6ee9969d4
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Mar 5 09:18:21 2022 +0700
+
+    Login server
+
+commit 854820105fcb5fbca073d6544c528bf10b5cff7c
+Author: electrodrago <quocviet11102001@gmail.com>
+Date:   Sat Mar 5 08:52:38 2022 +0700
+
+    Reference correction
+
+commit 27a181944df7b016cdef9f3c155d0cafe5270946
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Sat Mar 5 02:00:44 2022 +0700
+
+    first commit
