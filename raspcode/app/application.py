@@ -165,7 +165,7 @@ Student_point = 0
 # is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
 
 
-url = "http://10.128.133.159:4747/video"
+url = "http://192.168.1.4:4747/video"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
         return list(f.read())
@@ -669,7 +669,11 @@ class chooseCameraPage(tk.Frame):
             # img = cv2.resize(img, (268, 201))
             return img
 
-        cap = cv2.VideoCapture(0)#url)
+        # un-comment if you use webcam
+        #cap = cv2.VideoCapture(0)#url)
+
+        #un-comment if you use android camera 
+        cap = cv2.VideoCapture(url)
 
         def video_stream():
             _, frame = cap.read()
