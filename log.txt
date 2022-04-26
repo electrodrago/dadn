@@ -1,3 +1,15 @@
+commit 955339d8bbdb01d26c11bf0c5181f285958a5029
+Author: NamLam-L <nambhbg123@gmail.com>
+Date:   Mon Apr 25 23:58:57 2022 +0700
+
+    Modify the application UI and connect to update Student poitn on firebase
+
+commit b24d5ce3094a8d1ba48fa7054cc1b7434f1147c4
+Author: Vinh Tien <vinhtien1612@gmail.com>
+Date:   Mon Apr 25 14:40:19 2022 +0700
+
+    Create git log
+
 commit 1ce67c2b79c49e9df3903134a9401be36b2b8ec7
 Author: electrodrago <quocviet11102001@gmail.com>
 Date:   Mon Apr 25 11:33:55 2022 +0700
