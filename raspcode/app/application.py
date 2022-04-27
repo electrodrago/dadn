@@ -81,7 +81,7 @@ def getClasses(teacher_id, Course_name):
     class_list = reduce(lambda acc, ele: acc + [ele.id], classes, [])
     return class_list
 
-class_list = getClasses(user_to_access_firebase, course_to_access_firebase);
+class_list = getClasses(user_to_access_firebase, course_to_access_firebase)
 
 # # Global variable    
 class_to_access_firebase = class_list[0]
@@ -165,7 +165,7 @@ Student_point = 0
 # is_exist = check(getAnswerfile(user_to_access_firebase, course_to_access_firebase, class_to_access_firebase,semester_to_access_firebase).collection('STUDENT'))
 
 
-url = "http://192.168.1.4:4747/video"
+url = "http://10.127.32.234:4747/video"
 def char_list_from_file() -> List[str]:
     with open('model/charList.txt') as f:
         return list(f.read())
@@ -210,10 +210,12 @@ class App(tk.Tk):
             self.frames[page_name] = chooseSemesterPage(parent=self.container, controller=self)
         elif(page_name == 'chooseStudentIDPage'):
             self.frames[page_name] = chooseStudentIDPage(parent=self.container, controller=self)
+        
         self.frames[page_name].grid(row=0, column=0, sticky="nsew")
-        frame = self.frames[page_name]
+        frame = self.frames[page_name]        
         if page_name == "chooseDisplayPointPage":
-            frame.t1.start()
+            frame.trigger()
+        
         frame.tkraise()
 
 
@@ -793,23 +795,8 @@ class chooseDisplayPointPage(tk.Frame):
 
         space_label = tk.Label(self,height=1,bg='#00CC99')
         space_label.pack()
-
-        def func():
-            global done
-            while True:
-                time.sleep(1)
-                if done == True:
-                    for i in range(min(len(answer), len(answer_marking))):
-                        if answer[i] == answer_marking[i]:
-                            self.points_num += 1
-                    self.points.set('Result:\n' + str(self.points_num) + ' / ' + str(len(answer)))
-                    done = False
-                    global Student_point 
-                    Student_point = self.points_num
-                    print("end")
-                    break
         
-        self.t1 = Thread(target=func)
+        self.t1 = Thread(target=self.func)
         # self.t1.start()
 
         def assign_and_next_frame():
@@ -846,6 +833,29 @@ class chooseDisplayPointPage(tk.Frame):
             fg="#6666CC"
         )
         mark_another_button.pack(pady=10)
+    
+    def func(self):
+        global done
+        while True:
+            print(1)
+            time.sleep(1)
+            if done == True:
+                for i in range(min(len(answer), len(answer_marking))):
+                    if answer[i] == answer_marking[i]:
+                        self.points_num += 1
+                self.points.set('Result:\n' + str(self.points_num) + ' / ' + str(len(answer)))
+                done = False
+                global Student_point 
+                Student_point = self.points_num
+                print("end")
+                # self.t1.join(2)
+                break
+
+    def trigger(self):
+        self.t1 = Thread(target=self.func)
+        self.points_num = 0
+        self.t1.start()
+
 
 class chooseStudentIDPage(tk.Frame):
     def __init__(self, parent, controller):
